@@ -12,6 +12,8 @@ source_commit: 6d62228f2d808d33c8921b34b506e40125073e2e
 
 # 랄프톤 재현 비교 실험 — 계획 수립
 
+> **후속 상태:** 2026년 7월 17일 오후에 Phase 1~3 자료와 Phase 4 실행 스크립트가 생성됐다. 시스템 재부팅 후 재개 과정과 Question Mode 전환, 남은 실행 검증 과제는 [Phase 4 재개 기록](ralphthon-phase4-recovery.md)을 참고한다.
+
 ## 요약
 
 작업폴더에는 랄프톤에서 Codex CLI로 수행했던 Ralph Loop를 **Solar Open 2를 백엔드로 사용하는 Claude Code**에서 재현하고 비교하기 위한 계획이 작성되어 있다.
@@ -119,4 +121,3 @@ Git이 추적하는 Ralphthon 관련 파일은 계획 문서인 `docs/notes/note
 - [관찰 로그](../../log.md)
 - [`claude-upstage`의 권한 생략 옵션 미지원](../observations/claude-upstage-permission-flag.md)
 - [기존 Ralphthon 공개 저장소](https://github.com/changwonjeon/20260712-ralphthon-submit)
-

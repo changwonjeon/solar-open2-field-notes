@@ -11,6 +11,7 @@ timestamp: 2026-07-17T11:50:35+09:00
 ## 프로젝트
 
 - [랄프톤 재현 비교 실험 — 계획 수립](wiki/projects/ralphthon-reproduction-planning.md) — 작업폴더에 확정된 비교 실험 계획과 현재 진행 상태를 관찰한 기록
+- [랄프톤 Phase 4 재개와 Question Mode 전환](wiki/projects/ralphthon-phase4-recovery.md) — 시스템 재부팅 후 작업 재개, 실행 방식 변경과 17시 16분 기준 남은 검증 과제
 
 ## 관찰
 

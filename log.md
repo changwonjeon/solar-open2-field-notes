@@ -8,6 +8,17 @@ timestamp: 2026-07-17T11:50:35+09:00
 
 # Solar Open 2 Field Notes Log
 
+## [2026-07-17] troubleshoot | Ralph Loop 재개와 Question Mode 전환
+
+- 낮 12시 14분경 작업 지시 후 불명 시점의 시스템 재부팅으로 CLI 세션이 종료됐고, 오후 3시 40분경 `claude --resume`으로 준비 작업을 재개했다.
+- 재부팅 전 생성된 Phase 1~3 자료는 보존됐으며, 이후 Phase 4 실행 스크립트와 비교 계획을 계속 수정했다.
+- `claude-upstage`에 권한 생략 옵션을 전달하는 대신 인자 없는 대화형 실행과 tmux 기반 프롬프트·권한 응답 자동화로 전환했다.
+- `claude-upstage`가 Solar Open 2로 기동되는 화면과 launch/status/screenshot/quit 검증은 확인했다.
+- 실제 loop가 없는 성공 로그, 존재하지 않는 tmux 세션과 `&&` 체인, `tmux load-buffer` 표준입력 누락, watchdog 루트 경로 오류를 차례로 확인했다.
+- 작업폴더 커밋 `963d81a`, `918dc92`, `ed24e63`에서 Question Mode 전환과 후속 수정을 기록했다.
+- 17시 16분 기준 tmux 세션과 `claude-upstage` 프로세스가 없어 유효한 3시간 본 실행은 아직 확인되지 않았다.
+- 관련 문서: [랄프톤 Phase 4 재개와 Question Mode 전환](wiki/projects/ralphthon-phase4-recovery.md)
+
 ## [2026-07-17] observe | `claude-upstage` 권한 생략 옵션 거부
 
 - `claude-upstage --dangerously-skip-permissions` 실행이 `unknown command`로 종료된 캡처를 확인했다.
