@@ -107,9 +107,16 @@ Git이 추적하는 Ralphthon 관련 파일은 계획 문서인 `docs/notes/note
 7. 사용자 개입 여부
 8. 비교 지표의 산식과 원본 데이터
 
+## 확인된 통합 제약
+
+계획 수립 후 `claude-upstage --dangerously-skip-permissions` 실행이 래퍼 단계에서 거부되는 사실이 확인됐다. 작업폴더 계획은 이 옵션을 실행 전제로 사용하므로, 현재 상태에서는 Phase 4의 실행 절차를 그대로 적용할 수 없다.
+
+자세한 근거와 판단 범위는 [`claude-upstage`의 권한 생략 옵션 미지원](../observations/claude-upstage-permission-flag.md)에 기록한다.
+
 ## 관련 문서
 
 - [저장소 색인](../../index.md)
 - [관찰 로그](../../log.md)
+- [`claude-upstage`의 권한 생략 옵션 미지원](../observations/claude-upstage-permission-flag.md)
 - [기존 Ralphthon 공개 저장소](https://github.com/changwonjeon/20260712-ralphthon-submit)
 
