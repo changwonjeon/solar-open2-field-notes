@@ -8,6 +8,18 @@ timestamp: 2026-07-17T11:50:35+09:00
 
 # Solar Open 2 Field Notes Log
 
+## [2026-07-20 01:21 KST] review | Ralph Loop 스킬 정합성 검토와 남은 blocker
+
+- 비교 기준을 Codex 단독이 아니라 GPT+Codex, Claude+Claude Code 등 프론티어 에이전트 조합과 Solar Open 2+Claude Code의 비교로 명확히 했다.
+- 원본 Codex Ralph Loop 작업은 `_Upstage-backup-20260717`, Solar Open 2 작업은 `_Upstage`, Codex 설계·검토 산출물은 이 저장소의 `staging/ralph-skill-design/`으로 분리했다.
+- Solar Open 2가 `_Upstage/.claude/skills/`에 `/solar-ralph`와 `/git-checkpoint`를 생성했고, 새 Claude Code 세션에서 두 스킬의 discovery와 help 응답을 확인했다.
+- 상태 머신을 `pending → active → tests_passed → passed`로 분리하고 `checkpoint_failed`, `needs-operator`, resume의 state/HEAD/event 일치 계약과 local-only Git checkpoint 게이트를 설계했다.
+- 반복 정적 검토에서 shell 문법, NUL porcelain 처리, rename/copy, symlink, 승인 경로, secret 검사, upstream 기준선과 atomic state write 문제를 수정했다.
+- 최신 diff에는 아직 두 blocker가 남았다. `preflight.sh`의 Python 실패 코드가 command substitution 밖으로 보존되지 않을 수 있고, `commit-gate.sh`의 heredoc이 stdin을 소비해 성공 JSON의 `approved_paths`가 빈 배열이 될 수 있다.
+- `zsh -n`과 `git diff --check`는 통과했지만 실제 preflight와 commit gate의 기능 검증은 수행하지 않았다. 3시간 본 실행도 아직 시작하지 않았다.
+- `_Upstage`의 실제 상태는 `fix/solar-ralph-skill-consistency` 브랜치, 수정 파일 4개, 미추적 `.gitmessage`, `clean-coauthor.sh`, `data/`이다. 이 중 앞의 두 파일은 Solar 보고에서 누락됐으며 `data/`도 ignore 대상이 아니다.
+- 관련 문서: [Ralph Loop 스킬 설계와 실행 전 검증](wiki/projects/ralph-skill-stack-validation.md)
+
 ## [2026-07-17] troubleshoot | Ralph Loop 재개와 Question Mode 전환
 
 - 낮 12시 14분경 작업 지시 후 불명 시점의 시스템 재부팅으로 CLI 세션이 종료됐고, 오후 3시 40분경 `claude --resume`으로 준비 작업을 재개했다.

@@ -10,6 +10,7 @@ timestamp: 2026-07-17T11:50:35+09:00
 
 ## 프로젝트
 
+- [Ralph Loop 스킬 설계와 실행 전 검증](wiki/projects/ralph-skill-stack-validation.md) — 3시간 실행 실패를 실행 스택 문제로 분리하고 `/solar-ralph`와 `/git-checkpoint`를 설계·검토한 7월 19~20일 기록
 - [랄프톤 재현 비교 실험 — 계획 수립](wiki/projects/ralphthon-reproduction-planning.md) — 작업폴더에 확정된 비교 실험 계획과 현재 진행 상태를 관찰한 기록
 - [랄프톤 Phase 4 재개와 Question Mode 전환](wiki/projects/ralphthon-phase4-recovery.md) — 시스템 재부팅 후 작업 재개, 실행 방식 변경과 17시 16분 기준 남은 검증 과제
 

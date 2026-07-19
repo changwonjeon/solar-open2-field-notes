@@ -9,6 +9,24 @@ Upstage **Solar Open 2**를 실제 에이전트 환경에서 사용하며 얻은
 - Claude Code with Upstage
 - Hermes Agents with Upstage
 
+## 현재 진행 상황
+
+2026년 7월 20일 01시 21분(KST) 기준, Solar Open 2 + Claude Code 조합의 3시간 Ralph Loop 본 실행은 아직 시작하지 않았다. 7월 17일 실행 시도는 tmux 세션, 경로 계산, 프롬프트 주입, 기록기 연결과 checkpoint 계약이 안정적으로 결합되지 않아 유효한 3시간 실행으로 인정할 수 없었다.
+
+현재는 실패를 모델 성능 결과로 오인하지 않기 위해 실행 스택을 먼저 정비하고 있다. Solar Open 2가 생성한 프로젝트 스킬 `/solar-ralph`와 `/git-checkpoint`는 `_Upstage/.claude/skills/`에 만들어졌고 Claude Code의 help 호출로 발견 여부를 확인했다. 이후 Codex는 별도 기록 공간에서 설계와 diff를 검토하고, Solar Open 2가 `_Upstage` 안의 파일을 직접 수정하는 방식으로 출처를 분리했다.
+
+현재 남은 핵심 과제는 다음과 같다.
+
+- `preflight.sh`의 run-state 파싱 실패 코드가 command substitution 경계를 넘어 정확히 보존되도록 수정
+- `commit-gate.sh` 성공 JSON에 승인 경로 배열이 손실되지 않도록 argv 전달 복구
+- 임시 Git 저장소에서 첫 checkpoint, 후속 checkpoint, 실패 및 cleanup 경로를 비파괴적으로 검증
+- recorder, checkpoint monitor와 watchdog을 launcher에 실제 연결한 뒤 10분 soak test와 30분 rehearsal 수행
+- 위 검증을 통과하고 사용자 승인을 받은 뒤에만 3시간 본 실행 시작
+
+비교 대상은 Codex 단독이 아니다. **GPT 계열 모델+Codex**, **Claude 계열 모델+Claude Code** 같은 프론티어 에이전트 조합과 **Solar Open 2+Claude Code**를 같은 목표, 시간, 도구 계약과 산출물 기준에서 비교한다. Solar Open 2는 추격자 관점에서 장시간 자율 실행의 성능뿐 아니라 스킬 계약 이해, Git 안전성, 실패 복구, 상태 보고 정확도와 사용자 개입 비용을 개선할 수 있는 인사이트를 도출하는 것이 핵심이다.
+
+상세 진행 기록: [Ralph Loop 스킬 설계와 실행 전 검증](wiki/projects/ralph-skill-stack-validation.md)
+
 ## 목적
 
 - Solar Open 2의 실제 사용 과정과 결과를 재현 가능한 형태로 남깁니다.
@@ -45,6 +63,7 @@ Upstage **Solar Open 2**를 실제 에이전트 환경에서 사용하며 얻은
 ├── wiki/              # 주제별로 종합된 OKF Markdown 문서
 ├── assets/            # 공개 가능한 캡처, 그림과 문서 첨부물
 ├── snippets/          # 재사용 가능한 최소 코드와 설정 예시
+├── staging/           # Codex가 작성한 격리된 설계·검토 자료
 └── _private/          # 공개 금지 자료를 보관하는 로컬 전용 공간
 ```
 
@@ -65,6 +84,10 @@ Upstage **Solar Open 2**를 실제 에이전트 환경에서 사용하며 얻은
 ### `snippets/`
 
 핵심 동작을 보여주는 짧고 재사용 가능한 코드를 보관합니다. 전체 애플리케이션은 실제 작업 저장소에서 관리하며, 여기에는 이해와 재현에 필요한 최소 예제만 둡니다.
+
+### `staging/`
+
+Solar Open 2의 결과물과 Codex의 설계 기여를 섞지 않기 위한 격리 공간입니다. 현재 `staging/ralph-skill-design/`에는 실패 분류, 스킬 격차, 실행 계약, 수락 기준과 Solar 전달용 프롬프트가 들어 있다. 이 자료는 `_Upstage`의 Solar 결과물이 아니라 비교 실험을 준비하기 위한 Codex 측 설계 기록이다.
 
 ### `_private/`
 
