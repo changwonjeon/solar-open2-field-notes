@@ -8,6 +8,15 @@ timestamp: 2026-07-17T11:50:35+09:00
 
 # Solar Open 2 Field Notes Log
 
+## [2026-07-21] synthesize | 7월 20일까지의 `_Upstage` 작업 내역 종합
+
+- 실제 `_Upstage`의 README, 변경 로그, 실험 로그, Ralphthon 실행 로그와 현재 Git 이력을 대조했다.
+- 정리 기준점을 2026년 7월 20일 03시 58분(KST), `fix/solar-ralph-skill-consistency` 브랜치의 `8204119`로 확정했다.
+- 작업 공간 초기화, Ralphthon 자료 이식, Question Mode 전환, 실행 스크립트 안정화, 프로젝트 스킬 구현, 9개 정합성 보정과 Git checkpoint blocker 7건 수정·검증을 날짜별로 종합했다.
+- 첫 checkpoint 기능 경로는 통과했지만 runtime 통합, 후속·실패 경로, soak/rehearsal과 3시간 본 실행은 남았음을 구분했다.
+- 히스토리 재작성 전 hash, 중복 로그와 문서 날짜·Git timestamp 불일치를 기록상 주의사항으로 남겼다.
+- 관련 문서: [`_Upstage` 작업 내역 정리 — 2026년 7월 20일까지](wiki/projects/upstage-work-summary-through-2026-07-20.md)
+
 ## [2026-07-20 01:21 KST] review | Ralph Loop 스킬 정합성 검토와 남은 blocker
 
 - 비교 기준을 Codex 단독이 아니라 GPT+Codex, Claude+Claude Code 등 프론티어 에이전트 조합과 Solar Open 2+Claude Code의 비교로 명확히 했다.
