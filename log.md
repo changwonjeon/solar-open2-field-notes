@@ -16,6 +16,8 @@ timestamp: 2026-07-17T11:50:35+09:00
 - `tasks/02-meeting-minutes/source/original/`의 원본 9개, 회의록 문서, output, 기존 미추적 파일과 `_private/`를 보호 대상으로 지정했다.
 - 원본 blob 보존율 100%와 보호 자료 hash 일치를 통과하기 전에는 다음 단계로 진행하지 않고, 모든 검증 gate가 통과하기 전에는 `git add`, commit 또는 push를 수행하지 않도록 했다.
 - 현재 상태는 **Solar Open 2 복구 작업 진행 중**이며, migration 결과와 최종 gate는 아직 검증되지 않았다. 작업 완료나 구조 품질 개선으로 기록하지 않는다.
+- 복구 계획 전체를 별도 `Work Plan` 문서로 기록하고 상태를 `in-progress`로 표시했다.
+- 실행 계획: [`_Upstage` 구조 복구 실행 계획](wiki/projects/upstage-structure-recovery-plan-2026-07-23.md)
 - 관련 문서: [`_Upstage` `tasks/` 상위 구조 재편 후속 감사](wiki/projects/upstage-task-restructure-review-2026-07-23.md)
 
 ## [2026-07-23] review | `tasks/` 상위 구조 재편 후속 감사

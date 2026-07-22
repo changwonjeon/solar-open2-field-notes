@@ -10,6 +10,7 @@ timestamp: 2026-07-17T11:50:35+09:00
 
 ## 프로젝트
 
+- [`_Upstage` 구조 복구 실행 계획](wiki/projects/upstage-structure-recovery-plan-2026-07-23.md) — 누락 원본 복구, task 구조 정규화, 문서·OKF·링크 정합화와 최종 gate를 다섯 단계로 나눈 진행 중 계획
 - [`_Upstage` `tasks/` 상위 구조 재편 후속 감사](wiki/projects/upstage-task-restructure-review-2026-07-23.md) — task 중심 재편 완료 상태를 다시 검사하고, 상속 누락 42개·신규 누락 36개와 문서·OKF·링크 결함을 기록한 후속 보고서
 - [`_Upstage` LLM-Wiki·OKF 구조 개편 전후 및 Solar Open 2 평가](wiki/projects/upstage-okf-restructure-review-2026-07-22.md) — 7월 22일 구조 개편의 실제 diff를 skill 계약과 대조하고, 원본 누락·OKF·링크 결함 및 대안 구조를 기록한 감사 보고서
 - [`_Upstage` 작업 내역 정리 — 2026년 7월 20일까지](wiki/projects/upstage-work-summary-through-2026-07-20.md) — 작업 공간 초기화부터 Ralph Loop 스킬 구현과 첫 Git checkpoint 검증까지의 종합 타임라인
