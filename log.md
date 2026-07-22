@@ -8,6 +8,39 @@ timestamp: 2026-07-17T11:50:35+09:00
 
 # Solar Open 2 Field Notes Log
 
+## [2026-07-23 01:09 KST] handoff | Solar Open 2 단계별 구조 복구 작업 시작
+
+- 사용자가 후속 감사 결과를 바탕으로 Solar Open 2에 단계별 복구 프롬프트를 전달하고 실제 정리 작업을 시작했다.
+- 복구 절차를 ① read-only 상태 동결·migration manifest 작성, ② Ralphthon 원본 복구, ③ `tasks/` 구조 정규화, ④ README·AGENTS·OKF·링크 정합화, ⑤ read-only 최종 검증의 다섯 단계로 분리했다.
+- 첫 번째 안전 기준은 `7024b1b^`의 Ralphthon Source blob 42개와 현재 HEAD에서 삭제 예정인 미보존 자산 36개를 직접 재계산하고, 경로 수와 고유 blob 수를 구분해 최종 목적지를 제시하는 것이다.
+- `tasks/02-meeting-minutes/source/original/`의 원본 9개, 회의록 문서, output, 기존 미추적 파일과 `_private/`를 보호 대상으로 지정했다.
+- 원본 blob 보존율 100%와 보호 자료 hash 일치를 통과하기 전에는 다음 단계로 진행하지 않고, 모든 검증 gate가 통과하기 전에는 `git add`, commit 또는 push를 수행하지 않도록 했다.
+- 현재 상태는 **Solar Open 2 복구 작업 진행 중**이며, migration 결과와 최종 gate는 아직 검증되지 않았다. 작업 완료나 구조 품질 개선으로 기록하지 않는다.
+- 관련 문서: [`_Upstage` `tasks/` 상위 구조 재편 후속 감사](wiki/projects/upstage-task-restructure-review-2026-07-23.md)
+
+## [2026-07-23] review | `tasks/` 상위 구조 재편 후속 감사
+
+- 완료됐다고 전달받은 `_Upstage`의 `tasks/01-ralpthon`, `tasks/02-meeting-minutes` 구조를 현재 HEAD `6e8c5d1`과 worktree 기준으로 읽기 전용 재검토했다.
+- task별 `source/data/docs/output` 분리는 이전보다 명확하고, 회의록 원본 9개와 OKF 회의록 2개 및 별도 output이 존재함을 확인했다.
+- `7024b1b^`의 Ralphthon fixtures·Python package·tests 42개는 현재 filesystem에서 동일 blob이 0개로, 이전 누락이 복구되지 않았다.
+- 이번 worktree의 tracked 삭제 47개 중 11개만 동일 blob으로 보존됐고 `.codex`, `.omx`, project 문서 등 36개는 새 위치에서 찾을 수 없었다.
+- 새 task 파일 전체가 미추적이고 shell script가 `docs/`와 `src/`에 중복돼 현재 상태의 commit을 차단 판정했다.
+- Wiki 후보 40개 중 frontmatter 문제 13개, 잠재 broken link 44개와 README·AGENTS·index·log의 새 구조 불일치를 확인했다.
+- `zsh -n`과 `git diff --check`는 통과했으나 원본 보존·OKF·링크·문서 정합성 gate 실패로 종합 42/100을 부여했다.
+- 관련 문서: [`_Upstage` `tasks/` 상위 구조 재편 후속 감사](wiki/projects/upstage-task-restructure-review-2026-07-23.md)
+
+## [2026-07-22] review | `_Upstage` LLM-Wiki·OKF 구조 개편 감사
+
+- `_Upstage`의 구조 개편 전 `7024b1b^`, 개편 commit `7024b1b`, 현재 `6e8c5d1`의 파일 트리와 diff를 비교했다.
+- 사용자가 제공한 `wiki-organize` skill 원문을 읽고 Source/Wiki/Schema, AGENTS/CLAUDE, README/inbox, OKF, Ingest/Query/Lint, migration 승인·보존 계약을 평가 기준으로 삼았다.
+- 세 계층 분리, `AGENTS.md` 단일 규칙, `CLAUDE.md` import, `general-notes/`, `_inbox/` 도입은 적절한 적용으로 평가했다.
+- 반면 fixture 18개, Python 구현 7개, test/evaluator 16개 이상이 목적지 없이 삭제됐고, `.codex/.codex`·`.omx/.omx` 중복 nesting과 원본 script 중복이 생긴 사실을 확인했다.
+- commit 설명의 “frontmatter 10개 추가”와 달리 실제 diff에서 확인되는 추가는 1개이며, 현재 `docs/` Markdown 14개가 자체 frontmatter 규칙을 충족하지 못한다.
+- README·AGENTS·실제 트리의 경로 불일치, 구조 변경 로그 누락과 47개 잠재적 broken link를 기록했다. 예제 placeholder가 섞인 링크 수치는 실제 결함과 구분했다.
+- Solar Open 2의 skill 적용 산출물을 48/100으로 평가했다. 모델 실행 귀속은 사용자 설명을 따르되 Git만으로 skill invocation을 독립 검증할 수 없다는 한계를 명시했다.
+- `_Upstage`는 수정하지 않고 보존 중심의 대안 트리, 이동 매핑과 완료 gate를 문서로만 제안했다.
+- 관련 문서: [`_Upstage` LLM-Wiki·OKF 구조 개편 전후 및 Solar Open 2 평가](wiki/projects/upstage-okf-restructure-review-2026-07-22.md)
+
 ## [2026-07-21] synthesize | 7월 20일까지의 `_Upstage` 작업 내역 종합
 
 - 실제 `_Upstage`의 README, 변경 로그, 실험 로그, Ralphthon 실행 로그와 현재 Git 이력을 대조했다.
