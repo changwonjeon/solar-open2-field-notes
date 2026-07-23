@@ -1,7 +1,7 @@
 ---
 type: Index
 title: Solar Open 2 Claude Code 실사용 성능 보고서
-description: Claude Code의 모델 백엔드로 Solar Open 2를 사용한 네 가지 태스크의 근거 기반 평가 색인
+description: Claude Code의 모델 백엔드로 Solar Open 2를 사용한 네 가지 완료 태스크와 한 가지 계획 태스크의 근거 기반 평가 색인
 tags: [solar-open2, claude-code, evaluation, field-report]
 timestamp: 2026-07-23T00:00:00+09:00
 ---
@@ -18,6 +18,7 @@ timestamp: 2026-07-23T00:00:00+09:00
 - [Task 02 — 회의록 작성 (문서 요약·생성)](02-meeting-minutes/README.md): 한국어 다문서 취합·구조화·요약·생성이라는 범용 LLM 기본 능력
 - [Task 03 — Wiki 구조 재편 (에이전트 도구 사용·저장소 정리)](03-wiki-restructure/README.md): 대규모 파일·Git 작업에서의 도구 사용, 지시 준수와 자기검증
 - [Task 04 — 토크나이저 비교 (코딩 능력)](04-tokenizer-comparison/README.md): 발표 요구를 앱으로 구체화한 설계·구현·통합·디버깅 능력
+- [Task 05 — Ralphthon 철자 오류 재현 (명칭 보존·교정)](05-ralphthon-spelling-evaluation/README.md): 신조어 철자 추론과 명시된 canonical 철자의 보존, 저장소 작업 중 오타 확산을 구분하는 계획 실험
 
 ## 판정 범례
 

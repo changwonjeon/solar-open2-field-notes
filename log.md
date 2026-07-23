@@ -8,6 +8,13 @@ timestamp: 2026-07-17T11:50:35+09:00
 
 # Solar Open 2 Field Notes Log
 
+## 2026-07-24 — Task 05 Ralphthon 철자 오류 재현 실험 계획
+
+- 정확한 표기 `Ralphthon`과 canonical slug `ralphthon`을 기준으로 Solar Open 2의 철자 보존·추론·교정과 저장소 내 오타 확산을 분리 측정하는 실험을 설계했다.
+- 실제 실행은 `_Upstage`에서 `claude-upstage --model solar-open2`로 시작한 세션이 담당하며, Codex는 실행 명세만 준비한다.
+- 이 저장소에는 실험 전 상태를 `planned`로 표시한 Task 05 보고서 자리를 확보했다. 결과와 성능 판정은 아직 `N/A`다.
+- 계획 보고서: [Task 05 — Ralphthon 철자 오류 재현](reports/05-ralphthon-spelling-evaluation/README.md)
+
 ## 2026-07-23 — Ralphthon 표기 오류 전수 정정
 
 - 정확한 명칭은 `Ralphthon`, canonical slug는 `ralphthon`임을 사용자 확인으로 확정했다.

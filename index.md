@@ -10,11 +10,12 @@ timestamp: 2026-07-17T11:50:35+09:00
 
 ## 실사용 성능 보고서
 
-- [Solar Open 2 Claude Code 실사용 성능 보고서](reports/index.md) — 네 가지 실제 태스크에서 확인한 대체 가능 범위, 오류 해결 능력, 처리 시간과 사용자 개입 비용
+- [Solar Open 2 Claude Code 실사용 성능 보고서](reports/index.md) — 네 가지 완료 태스크와 한 가지 계획 태스크의 대체 가능 범위, 오류 해결 능력, 처리 시간과 사용자 개입 비용
 - [Task 01 — Ralphthon 재현](reports/01-ralphthon/README.md) — Codex 기준선의 Solar Open 2 + Claude Code 이식 과정과 실행 준비도
 - [Task 02 — 회의록 작성](reports/02-meeting-minutes/README.md) — 한국어 다문서 취합·구조화 품질과 사실 검수 필요성
 - [Task 03 — Wiki 구조 재편](reports/03-wiki-restructure/README.md) — Task 01 자산 migration의 정확성, 지시 준수와 자기검증
 - [Task 04 — 토크나이저 비교](reports/04-tokenizer-comparison/README.md) — 프로토타입 구현 성과와 비교 수치 검증 결함
+- [Task 05 — Ralphthon 철자 오류 재현](reports/05-ralphthon-spelling-evaluation/README.md) — 신조어 철자 추론과 canonical 명칭 보존·교정·오타 확산을 분리하는 계획 보고서
 
 ## 프로젝트
 
