@@ -8,6 +8,14 @@ timestamp: 2026-07-17T11:50:35+09:00
 
 # Solar Open 2 Field Notes Log
 
+## 2026-07-23 — Solar Open 2 Claude Code 실사용 성능 보고서 구성
+
+- `_Upstage`의 네 가지 task를 Claude Code 모델 대체 가능성 관점에서 다시 감사했다.
+- Task 01의 Codex 기준선, Solar 이식 과정과 Task 03 구조 재편의 영향을 하나의 인과 흐름으로 연결했다.
+- 모델 행동과 Plugin·CLI·WSL·tmux·Git 경로 같은 하네스 문제를 분리하고, 전체 변환·감독 비용은 실사용 비용으로 기록하는 원칙을 세웠다.
+- Task 02는 다문서 구조화와 사실 충실도, Task 03은 보호 범위와 자기검증, Task 04는 프로토타입과 핵심 비교 수치의 정확성을 각각 독립 기준으로 평가했다.
+- `reports/` 색인과 태스크별 상세 보고서를 추가하고 루트 README와 공개 색인을 연결했다.
+
 ## [2026-07-23 01:09 KST] handoff | Solar Open 2 단계별 구조 복구 작업 시작
 
 - 사용자가 후속 감사 결과를 바탕으로 Solar Open 2에 단계별 복구 프롬프트를 전달하고 실제 정리 작업을 시작했다.

@@ -8,6 +8,14 @@ timestamp: 2026-07-17T11:50:35+09:00
 
 # Solar Open 2 Field Notes Index
 
+## 실사용 성능 보고서
+
+- [Solar Open 2 Claude Code 실사용 성능 보고서](reports/index.md) — 네 가지 실제 태스크에서 확인한 대체 가능 범위, 오류 해결 능력, 처리 시간과 사용자 개입 비용
+- [Task 01 — Ralphthon 재현](reports/01-ralpthon/README.md) — Codex 기준선의 Solar Open 2 + Claude Code 이식 과정과 실행 준비도
+- [Task 02 — 회의록 작성](reports/02-meeting-minutes/README.md) — 한국어 다문서 취합·구조화 품질과 사실 검수 필요성
+- [Task 03 — Wiki 구조 재편](reports/03-wiki-restructure/README.md) — Task 01 자산 migration의 정확성, 지시 준수와 자기검증
+- [Task 04 — 토크나이저 비교](reports/04-tokenizer-comparison/README.md) — 프로토타입 구현 성과와 비교 수치 검증 결함
+
 ## 프로젝트
 
 - [`_Upstage` 구조 복구 실행 계획](wiki/projects/upstage-structure-recovery-plan-2026-07-23.md) — 누락 원본 복구, task 구조 정규화, 문서·OKF·링크 정합화와 최종 gate를 다섯 단계로 나눈 진행 중 계획
