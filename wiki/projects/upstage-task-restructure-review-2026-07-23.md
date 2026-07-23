@@ -15,7 +15,7 @@ comparison_commit: 7024b1b
 
 ## 결론
 
-`tasks/01-ralpthon`과 `tasks/02-meeting-minutes`로 실험을 분리한 **상위 구조의 방향은 이전보다 명확하다.** 특히 회의록 실험은 `source/original`, `docs/meeting-minutes`, `output`으로 입력·위키·산출물을 나눈 점이 좋다.
+`tasks/01-ralphthon`과 `tasks/02-meeting-minutes`로 실험을 분리한 **상위 구조의 방향은 이전보다 명확하다.** 특히 회의록 실험은 `source/original`, `docs/meeting-minutes`, `output`으로 입력·위키·산출물을 나눈 점이 좋다.
 
 하지만 2026년 7월 23일 재검토 시점의 worktree는 **커밋하면 안 되는 상태**다. 이전 감사에서 발견한 Ralphthon 원본 42개가 여전히 복구되지 않았고, 이번 재편에서는 현재 HEAD가 추적하던 Ralph 프로젝트 자산 36개가 새 위치에서 blob hash로 발견되지 않는다. 새 `tasks/` 파일은 모두 미추적이며 README·AGENTS·index·log도 실제 구조와 맞지 않는다.
 
@@ -39,10 +39,10 @@ comparison_commit: 7024b1b
 
 ```text
 tasks/
-├── 01-ralpthon/
+├── 01-ralphthon/
 │   ├── source/
 │   ├── data/
-│   ├── docs/ralpthon/
+│   ├── docs/ralphthon/
 │   └── output/
 └── 02-meeting-minutes/
     ├── source/original/
@@ -64,9 +64,9 @@ tasks/
 현재 HEAD에서 삭제로 보이는 47개 중 11개는 현재 파일 트리의 동일 blob으로 찾을 수 있다.
 
 - `docs/experiments/experiment-log.md` → `docs/experiment-log.md`
-- Ralph 문서 4개 → `tasks/01-ralpthon/docs/ralpthon/`
-- shell script 3개 → `src/scripts/ralpthon/original/` 및 task 문서 경로
-- 이전 `projects/.../ralpthon_src/...`의 shell script 3개 → 현재 동일 blob 존재
+- Ralph 문서 4개 → `tasks/01-ralphthon/docs/ralphthon/`
+- shell script 3개 → `src/scripts/ralphthon/original/` 및 task 문서 경로
+- 이전 `projects/.../ralphthon_src/...`의 shell script 3개 → 현재 동일 blob 존재
 
 ## P0 — 커밋 차단 결함
 
@@ -97,11 +97,11 @@ tasks/
 | 실험 index | 1 | 기존 `docs/experiments/index.md` |
 | **합계** | **36** | |
 
-중복 nesting을 없애기 위해 `.codex/.codex`, `.omx/.omx`를 삭제하는 것 자체는 맞지만, 내부 자산을 `tasks/01-ralpthon/source/` 또는 다른 canonical 경로로 옮기지 않고 삭제하면 안 된다.
+중복 nesting을 없애기 위해 `.codex/.codex`, `.omx/.omx`를 삭제하는 것 자체는 맞지만, 내부 자산을 `tasks/01-ralphthon/source/` 또는 다른 canonical 경로로 옮기지 않고 삭제하면 안 된다.
 
 ### 3. 새 구조 전체가 미추적이라 Git은 rename으로 보호하지 못한다
 
-`tasks/01-ralpthon`과 `tasks/02-meeting-minutes`의 파일이 모두 `??` 상태다. 지금 일부만 stage하거나 commit하면 대량 삭제만 들어가거나 원본과 산출물이 불완전하게 기록될 위험이 있다. migration manifest와 path별 staging 검증 전에는 `git add -A`를 사용하면 안 된다.
+`tasks/01-ralphthon`과 `tasks/02-meeting-minutes`의 파일이 모두 `??` 상태다. 지금 일부만 stage하거나 commit하면 대량 삭제만 들어가거나 원본과 산출물이 불완전하게 기록될 위험이 있다. migration manifest와 path별 staging 검증 전에는 `git add -A`를 사용하면 안 된다.
 
 ## P1 — 구조·문서 정합성 결함
 
@@ -127,7 +127,7 @@ frontmatter title과 본문이 `Experiments Index`, `Experiments Directory`이�
 
 - 회의록 output을 `docs/experiments/meeting-minutes/...`라고 기록하지만 실제 위치는 `tasks/02-meeting-minutes/docs/meeting-minutes/...`다.
 - 입력을 `_inbox/`라고만 기록하고 현재 canonical source 경로를 남기지 않았다.
-- Ralph experiment log를 `tasks/01-ralpthon/docs/ralpthon/experiment-log.md`라고 바꿨지만 실제 파일은 `docs/experiment-log.md`다.
+- Ralph experiment log를 `tasks/01-ralphthon/docs/ralphthon/experiment-log.md`라고 바꿨지만 실제 파일은 `docs/experiment-log.md`다.
 - 구조 재편 자체에 대한 migration 기록, blob 보존 수치와 이동표가 없다.
 - 7월 19일 로그 중복도 그대로다.
 
@@ -141,7 +141,7 @@ frontmatter title과 본문이 `Experiments Index`, `Experiments Directory`이�
 
 ### 실행 script가 `docs/` 안에 남아 있다
 
-`tasks/01-ralpthon/docs/ralpthon/`에는 shell script 3개가 있다. 동시에 같은 blob이 `src/scripts/ralpthon/original/`에도 있어 canonical source가 중복된다. task의 `docs/`는 Wiki Markdown으로 한정하고 실행 파일은 `source/` 또는 `src/` 중 하나에만 두는 편이 맞다.
+`tasks/01-ralphthon/docs/ralphthon/`에는 shell script 3개가 있다. 동시에 같은 blob이 `src/scripts/ralphthon/original/`에도 있어 canonical source가 중복된다. task의 `docs/`는 Wiki Markdown으로 한정하고 실행 파일은 `source/` 또는 `src/` 중 하나에만 두는 편이 맞다.
 
 ## OKF·링크 lint
 
@@ -182,7 +182,7 @@ code fence와 명백한 placeholder를 제외한 검사에서 잠재 broken link
 
 ## 수정 우선순위
 
-1. `7024b1b^`에서 42개 Source blob을 `tasks/01-ralpthon/source/` 아래의 명확한 원형 구조로 복구한다.
+1. `7024b1b^`에서 42개 Source blob을 `tasks/01-ralphthon/source/` 아래의 명확한 원형 구조로 복구한다.
 2. HEAD에서 삭제 예정인 `.codex`, `.omx`, 프로젝트 관리 문서 35개를 task 01의 source·project-doc 위치로 blob 보존 이동한다. 과거 experiments index는 새 root index에 의미를 흡수했는지 별도로 판단한다.
 3. task 01의 shell script canonical 위치를 하나로 정한다. `docs/` 안의 script는 제거하되 canonical copy 보존을 먼저 검증한다.
 4. task root에 README 또는 OKF `index.md`를 만들고 Source/Wiki/Output 변경 계약을 기록한다.

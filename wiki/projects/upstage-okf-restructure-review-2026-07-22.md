@@ -67,7 +67,7 @@ _Upstage/
 │   │       └── .omx/
 │   ├── notes/notes/
 │   └── guide, reference, templates
-├── src/scripts/ralpthon/           # Solar 적응 실행 코드
+├── src/scripts/ralphthon/           # Solar 적응 실행 코드
 ├── CLAUDE.md                       # 규칙 본문
 └── README.md
 ```
@@ -92,7 +92,7 @@ _Upstage/
 - `docs/notes/notes/`의 3개 파일은 `docs/notes/general-notes/`로 100% rename됐다.
 - `.codex`와 `.omx` 자료는 `projects/ralph-loop/`로 100% rename됐다.
 - `checklist.md`, `execution-log.md`도 `projects/ralph-loop/`로 이동했다.
-- 원본 shell script 3개가 `src/scripts/ralpthon/original/`과 `projects/ralph-loop/ralpthon_src/.../original/` 두 곳에 추가됐다.
+- 원본 shell script 3개가 `src/scripts/ralphthon/original/`과 `projects/ralph-loop/ralphthon_src/.../original/` 두 곳에 추가됐다.
 - 추적 파일 수는 133개에서 101개로 줄었다.
 - 구조 개편 직후 93개 파일에 변화가 있었고, diff는 375줄 추가·5,657줄 삭제였다.
 
@@ -155,14 +155,14 @@ skill은 재구조화 시 가벼운 인터뷰, 새 구조안 제시, 대량 이�
 
 원래 `ralphthon/.codex/...`를 `projects/ralph-loop/.codex/`로 옮기는 과정에서 실제 경로가 `projects/ralph-loop/.codex/.codex/...`가 됐다. `.omx`도 `.omx/.omx/...`가 됐다. 이는 이동 destination 계산에서 basename을 중복 삽입한 흔적으로 보인다.
 
-동일한 원본 shell script 3개는 `src/scripts/ralpthon/original/`과 `projects/ralph-loop/ralpthon_src/scripts/ralpthon/original/` 양쪽에 추가됐다. 어느 쪽이 canonical source인지 규칙이 없어 이후 drift가 발생할 수 있다.
+동일한 원본 shell script 3개는 `src/scripts/ralphthon/original/`과 `projects/ralph-loop/ralphthon_src/scripts/ralphthon/original/` 양쪽에 추가됐다. 어느 쪽이 canonical source인지 규칙이 없어 이후 drift가 발생할 수 있다.
 
 ### P1 — lint를 완료하지 않았다
 
 단순 Markdown 상대 링크 검사에서 47개가 존재하지 않는 대상으로 나왔다. 예시 placeholder와 Source 계층 안의 과거 링크를 포함한 수치라 모두 같은 심각도는 아니지만, 다음은 실제 구조 변경과 직접 관련된 결함이다.
 
 - `docs/index.md` → 존재하지 않는 `templates/index.md`
-- `docs/experiments/index.md` → 존재하지 않는 `ralpthon/index.md` 표기 오류(실제 하위 index와의 경로 상태도 재검증 필요)
+- `docs/experiments/index.md` → 존재하지 않는 `ralphthon/index.md` 표기 오류(실제 하위 index와의 경로 상태도 재검증 필요)
 - `docs/notes/index.md` → 옛 `notes/index.md`
 - Ralph 비교 문서 → 옛 `notes/notes/` 및 잘못된 `../src/` 상대 경로
 - 여러 notes 문서 → 실제 위치보다 한 단계 얕은 `../guide`, `../reference`, `../templates` 링크
@@ -173,7 +173,7 @@ skill은 기존 `log.md`를 이어 쓰고 구조 변경 자체를 기록하라�
 
 ### P2 — Source 불변성 규칙이 서로 모순된다
 
-skill의 재구조화 절차는 사용자 승인 후 기존 파일을 새 위치로 옮기라고 하지만, 마지막 원칙은 원본을 절대 이동하지 말라고 한다. 결과물의 `AGENTS.md`도 `src/scripts/ralpthon/original/`을 불변 원본이라 부르면서 이번 commit에서 원본을 새로 복제했다. 구조 전환기에만 허용되는 migration 규칙과 정상 운영기의 immutability 규칙을 구분했어야 한다.
+skill의 재구조화 절차는 사용자 승인 후 기존 파일을 새 위치로 옮기라고 하지만, 마지막 원칙은 원본을 절대 이동하지 말라고 한다. 결과물의 `AGENTS.md`도 `src/scripts/ralphthon/original/`을 불변 원본이라 부르면서 이번 commit에서 원본을 새로 복제했다. 구조 전환기에만 허용되는 migration 규칙과 정상 운영기의 immutability 규칙을 구분했어야 한다.
 
 ## skill 준수도 평가
 

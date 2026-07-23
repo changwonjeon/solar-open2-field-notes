@@ -53,9 +53,9 @@ Solar 작업공간은 원격 `origin/main`의 `6d62228` 이후 로컬에 다음 
 
 추가로 확인한 상태는 다음과 같다.
 
-- `.claude/skills/run-ralpthon/SKILL.md`는 존재하지만 `.gitignore`의 `/.claude/` 규칙 때문에 추적되지 않는다.
+- `.claude/skills/run-ralphthon/SKILL.md`는 존재하지만 `.gitignore`의 `/.claude/` 규칙 때문에 추적되지 않는다.
 - 이 스킬은 tmux 실행과 watchdog을 설명하는 launcher이며 Ralph 작업 반복 계약은 정의하지 않는다.
-- Solar 세션의 발견된 skill 목록에 `ralph` 또는 `run-ralpthon`이 없었던 기록이 있다.
+- Solar 세션의 발견된 skill 목록에 `ralph` 또는 `run-ralphthon`이 없었던 기록이 있다.
 - 초기 입력은 문자 그대로 `$ralph`와 Goal 전체를 tmux buffer로 붙여 넣는다.
 - `claude-upstage` 래퍼는 모델, continue와 resume만 전달하며 일반 Claude CLI 옵션을 통과시키지 않는다.
 - `record-session.sh`와 `capture-checkpoints.sh`는 launcher에서 시작되지 않는다.

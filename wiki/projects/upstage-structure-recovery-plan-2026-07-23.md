@@ -114,7 +114,7 @@ source_head_at_planning: 6e8c5d10a4eca26b52c33462ca90ee94baea60ca
 ### 기본 canonical 위치
 
 ```text
-tasks/01-ralpthon/source/codex-original/
+tasks/01-ralphthon/source/codex-original/
 ├── fixtures/
 ├── package/
 ├── tests/
@@ -151,7 +151,7 @@ tasks/01-ralpthon/source/codex-original/
 
 ```text
 tasks/
-├── 01-ralpthon/
+├── 01-ralphthon/
 │   ├── README.md
 │   ├── AGENTS.md
 │   ├── CLAUDE.md
@@ -159,7 +159,7 @@ tasks/
 │   │   ├── codex-original/
 │   │   └── solar-adaptation/
 │   ├── data/
-│   ├── docs/ralpthon/
+│   ├── docs/ralphthon/
 │   └── output/
 └── 02-meeting-minutes/
     ├── README.md
@@ -173,8 +173,8 @@ tasks/
 
 ### canonical 규칙
 
-- Codex 원본: `tasks/01-ralpthon/source/codex-original/`
-- 현재 Solar 적응 실행 코드: 루트 `src/scripts/ralpthon/`
+- Codex 원본: `tasks/01-ralphthon/source/codex-original/`
+- 현재 Solar 적응 실행 코드: 루트 `src/scripts/ralphthon/`
 - task `docs/`에는 실행 가능한 shell script를 두지 않는다.
 - 동일 원본을 여러 위치에 복제하지 않는다.
 - `.codex/.codex`, `.omx/.omx` 중복 nesting을 만들지 않는다.

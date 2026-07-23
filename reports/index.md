@@ -14,7 +14,7 @@ timestamp: 2026-07-23T00:00:00+09:00
 
 ## 보고서
 
-- [Task 01 — Ralphthon 재현 (장시간 에이전트 실행·환경 이식)](01-ralpthon/README.md): Codex용 Ralph Loop를 Solar Open 2 + Claude Code로 이식하는 난도, 장애 해결과 장시간 실행 준비도
+- [Task 01 — Ralphthon 재현 (장시간 에이전트 실행·환경 이식)](01-ralphthon/README.md): Codex용 Ralph Loop를 Solar Open 2 + Claude Code로 이식하는 난도, 장애 해결과 장시간 실행 준비도
 - [Task 02 — 회의록 작성 (문서 요약·생성)](02-meeting-minutes/README.md): 한국어 다문서 취합·구조화·요약·생성이라는 범용 LLM 기본 능력
 - [Task 03 — Wiki 구조 재편 (에이전트 도구 사용·저장소 정리)](03-wiki-restructure/README.md): 대규모 파일·Git 작업에서의 도구 사용, 지시 준수와 자기검증
 - [Task 04 — 토크나이저 비교 (코딩 능력)](04-tokenizer-comparison/README.md): 발표 요구를 앱으로 구체화한 설계·구현·통합·디버깅 능력

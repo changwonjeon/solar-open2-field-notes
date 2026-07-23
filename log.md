@@ -8,6 +8,14 @@ timestamp: 2026-07-17T11:50:35+09:00
 
 # Solar Open 2 Field Notes Log
 
+## 2026-07-23 — Ralphthon 표기 오류 전수 정정
+
+- 정확한 명칭은 `Ralphthon`, canonical slug는 `ralphthon`임을 사용자 확인으로 확정했다.
+- `_Upstage` Git 이력과 현재 트리를 조사해 잘못된 철자가 2026-07-17 도입된 뒤 Task 03 구조 재편에서 task·Wiki·실행 경로 전반으로 확대된 사실을 확인했다.
+- 정정 전 잘못된 Task 01 상위 경로 아래 tracked 파일은 85개였다. ignored 로컬 Skill과 결과 폴더에도 같은 오타가 있었다.
+- Codex가 예외적으로 `_Upstage`의 이름과 참조를 정정했으며 이 기여는 Solar Open 2 결과와 분리한다.
+- 근거 문서: [Ralphthon 표기 오류 확산과 canonical 경로 정정](wiki/projects/ralphthon-spelling-correction-2026-07-23.md)
+
 ## 2026-07-23 — Task 03 후속 수정 중 재검증
 
 - 완료 보고 직후 Task 03을 다시 감사했으나 Step 3 상태, blob 수, 링크 분류, 보호 범위와 기존 테스트 실패가 남아 있음을 확인했다.
@@ -37,7 +45,7 @@ timestamp: 2026-07-17T11:50:35+09:00
 
 ## [2026-07-23] review | `tasks/` 상위 구조 재편 후속 감사
 
-- 완료됐다고 전달받은 `_Upstage`의 `tasks/01-ralpthon`, `tasks/02-meeting-minutes` 구조를 현재 HEAD `6e8c5d1`과 worktree 기준으로 읽기 전용 재검토했다.
+- 완료됐다고 전달받은 `_Upstage`의 `tasks/01-ralphthon`, `tasks/02-meeting-minutes` 구조를 현재 HEAD `6e8c5d1`과 worktree 기준으로 읽기 전용 재검토했다.
 - task별 `source/data/docs/output` 분리는 이전보다 명확하고, 회의록 원본 9개와 OKF 회의록 2개 및 별도 output이 존재함을 확인했다.
 - `7024b1b^`의 Ralphthon fixtures·Python package·tests 42개는 현재 filesystem에서 동일 blob이 0개로, 이전 누락이 복구되지 않았다.
 - 이번 worktree의 tracked 삭제 47개 중 11개만 동일 blob으로 보존됐고 `.codex`, `.omx`, project 문서 등 36개는 새 위치에서 찾을 수 없었다.

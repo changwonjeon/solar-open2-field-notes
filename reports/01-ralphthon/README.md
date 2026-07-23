@@ -188,7 +188,7 @@ Task 03 구조 재편 뒤 canonical 경로가 바뀌었으므로, 과거 수정�
 
 ## Task 03 구조 재편과의 관계
 
-Task 03은 Wiki와 task 디렉터리 구조를 canonical 형태로 정리하고 frontmatter·링크·index를 맞추는 별도 정비 작업이다. Task 01 자료도 이 과정에서 `tasks/01-ralpthon` 계층으로 이동·분류됐다.
+Task 03은 Wiki와 task 디렉터리 구조를 canonical 형태로 정리하고 frontmatter·링크·index를 맞추는 별도 정비 작업이다. Task 01 자료도 이 과정에서 `tasks/01-ralphthon` 계층으로 이동·분류됐다.
 
 두 Task의 관계는 다음처럼 제한한다.
 
@@ -202,7 +202,7 @@ Task 03은 Wiki와 task 디렉터리 구조를 canonical 형태로 정리하고 
 
 ## 2026-07-23 재검증 업데이트
 
-Task 03 완료 보고를 다시 확인하는 동안 Ralphthon 실행 스크립트 디렉터리를 `ralpthon`에서 `ralphthon`으로 옮기는 후속 작업이 시작됐다. 감사 중 11개 script rename이 staging됐고 일부 launcher·recorder 파일에는 추가 수정도 생겼다. 이는 이전의 철자와 canonical 경로 불일치를 바로잡으려는 작업으로 보이지만, 변경 중인 상태에서는 launcher가 처음부터 끝까지 실행된다고 판단할 수 없다.
+Task 03 완료 보고를 다시 확인하는 동안 잘못된 철자의 Ralphthon 실행 스크립트 디렉터리를 canonical `src/scripts/ralphthon/`으로 옮기는 후속 작업이 시작됐다. 감사 중 11개 script rename이 staging됐고 일부 launcher·recorder 파일에는 추가 수정도 생겼다. 이후 사용자 확인에 따라 Task 01·Wiki·Skill·결과 폴더까지 전수 정정했지만, 변경 중인 상태에서는 launcher가 처음부터 끝까지 실행된다고 판단할 수 없다. 명칭 오류의 Git 근거와 Codex 개입 범위는 [별도 특이사항 기록](../../wiki/projects/ralphthon-spelling-correction-2026-07-23.md)에 정리했다.
 
 같은 시점에 보존된 Codex 테스트를 다시 실행한 결과는 65개 중 62개 통과, 1개 실패, 2개 오류로 이전 감사와 같았다. 누락된 evidence와 staging 자료를 요구하는 테스트가 계속 실패한다.
 

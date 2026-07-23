@@ -17,7 +17,7 @@ producer: Codex
 2. `/git-checkpoint`: 안전한 local checkpoint commit 계약
 3. runtime scripts: launch, heartbeat, recorder, deadline과 artifact manifest
 
-기존 `run-ralpthon`은 위 스킬을 호출하는 launcher 설계로 대체하거나 축소한다. 별도의 recover/finalize skill은 만들지 않고 `/solar-ralph`의 references와 mode argument로 통합한다.
+기존 `run-ralphthon`은 위 스킬을 호출하는 launcher 설계로 대체하거나 축소한다. 별도의 recover/finalize skill은 만들지 않고 `/solar-ralph`의 references와 mode argument로 통합한다.
 
 ## 기능 배치
 

@@ -24,7 +24,7 @@ producer: Codex
 
 지금은 어떤 파일도 수정하지 말고 다음을 조사해라.
 1. RALPH_GOAL.md와 원본 Codex 실행 스크립트가 요구하는 반복·권한·checkpoint·Git·deadline 계약
-2. 현재 .claude/skills/run-ralpthon, Solar 실행 스크립트와 로그가 실제로 제공하는 계약
+2. 현재 .claude/skills/run-ralphthon, Solar 실행 스크립트와 로그가 실제로 제공하는 계약
 3. Claude Code가 현재 발견하는 skill 목록에 ralph 관련 skill이 있는지
 4. recorder, checkpoint monitor와 watchdog이 launcher에 실제 연결돼 있는지
 5. Git branch, upstream, tracked/untracked 변경과 .claude ignore 상태

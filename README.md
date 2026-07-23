@@ -17,12 +17,12 @@ Solar Open 2를 Claude Code CLI의 모델 백엔드로 사용한 네 가지 실�
 
 | 태스크 | 현재 판단 | 관측 시간 | Claude Code 대체 관점의 요약 |
 | --- | --- | --- | --- |
-| [01 — Ralphthon 재현 (장시간 에이전트 실행·환경 이식)](reports/01-ralpthon/README.md) | 본 과제 성능 판정 불가 | Solar 본 실행 없음 | Codex용 장시간 자율 작업을 Claude Code 환경으로 이식하는 난도와 실행 준비도를 시험한다. Solar 백엔드 기동과 일부 안전 게이트는 확인했지만 유효한 본 실행은 없다. |
+| [01 — Ralphthon 재현 (장시간 에이전트 실행·환경 이식)](reports/01-ralphthon/README.md) | 본 과제 성능 판정 불가 | Solar 본 실행 없음 | Codex용 장시간 자율 작업을 Claude Code 환경으로 이식하는 난도와 실행 준비도를 시험한다. Solar 백엔드 기동과 일부 안전 게이트는 확인했지만 유효한 본 실행은 없다. |
 | [02 — 회의록 작성 (문서 요약·생성)](reports/02-meeting-minutes/README.md) | 해당 범위에서 대체 가능 | 미측정 | 범용 LLM의 기본 업무인 한국어 다문서 취합·요약·구조화를 시험했으며, 문제없이 실용적인 결과를 완성했다. |
 | [03 — Wiki 구조 재편 (에이전트 도구 사용·저장소 정리)](reports/03-wiki-restructure/README.md) | 감독하에 조건부 대체 가능·후속 검증 중 | 미측정 | 복잡한 migration에서 파일 탐색·이동, Git 및 검증 도구 사용, 지시 유지 능력을 시험한다. 대규모 정리를 수행했고 외부 감사 지적에도 후속 대응하고 있다. |
 | [04 — 토크나이저 비교 (코딩 능력)](reports/04-tokenizer-comparison/README.md) | 프로토타입 코딩·디버깅에 대체 가능 | 주 세션 약 91분, 겹치는 후속 약 26분 | 요구사항 분석, 앱 설계, 외부 라이브러리 통합과 디버깅 능력을 시험했다. 실행 가능한 Streamlit 앱을 만들었고 전문 수치는 oracle 테스트로 보강하면 된다. |
 
-**(Task 01 — 장시간 에이전트 실행·환경 이식)** Codex가 랄프톤에서 수행한 Ralph Loop를 Solar Open 2 + Claude Code로 재현하려는 실험이다. 서로 다른 CLI·Plugin·Skill 계약을 변환하고 장시간 자율 실행이 가능한지 확인한다는 데 의미가 있다. Solar 백엔드 기동, 프로젝트 Skill 발견과 첫 checkpoint 성공 경로까지 확인했지만 유효한 본 실행은 아직 없다. 상세: [`reports/01-ralpthon/README.md`](reports/01-ralpthon/README.md)
+**(Task 01 — 장시간 에이전트 실행·환경 이식)** Codex가 랄프톤에서 수행한 Ralph Loop를 Solar Open 2 + Claude Code로 재현하려는 실험이다. 서로 다른 CLI·Plugin·Skill 계약을 변환하고 장시간 자율 실행이 가능한지 확인한다는 데 의미가 있다. Solar 백엔드 기동, 프로젝트 Skill 발견과 첫 checkpoint 성공 경로까지 확인했지만 유효한 본 실행은 아직 없다. 상세: [`reports/01-ralphthon/README.md`](reports/01-ralphthon/README.md)
 
 **(Task 02 — 문서 요약·생성)** 여러 한국어 행사 기록을 읽기 쉬운 종합 회의록과 Q&A 문서로 완성했다. 범용 LLM의 기본 능력인 다문서 취합·요약·생성, 긴 문맥의 구조 유지와 형식 준수를 확인하는 테스트다. 이 범위에서는 Claude 모델을 실용적으로 대체할 수 있다고 평가한다. 상세: [`reports/02-meeting-minutes/README.md`](reports/02-meeting-minutes/README.md)
 
@@ -151,3 +151,9 @@ timestamp: 2026-07-17
 ## 보안 주의
 
 Solar Open 2 Private Beta API의 입·출력 데이터에는 타인의 개인정보나 민감정보를 포함하지 않습니다. API 키는 승인된 용도에서만 사용하고 제3자에게 공유하지 않습니다. 실험 로그와 화면 캡처 역시 공개 전에 반드시 비식별 처리합니다.
+
+## 특이사항: Ralphthon 명칭 오류
+
+정확한 표기는 **Ralphthon**이고 경로 slug는 `ralphthon`이다. Solar Open 2 작업에서는 잘못된 `ralpthon` 표기가 문서·task·Wiki·실행 스크립트·Skill·결과 폴더로 반복 확산됐다. 사용자가 올바른 철자를 지정한 뒤 Codex가 작업 저장소에 예외적으로 개입해 현재 이름과 참조를 전수 정정했다.
+
+이는 대량 수정 능력과 별개로 canonical 명칭을 먼저 고정하고 금지 문자열 검사를 완료 gate로 둘 필요가 있음을 보여준다. 최초 도입 커밋, 구조 재편 이력, 정정 범위와 재검색 결과는 [Ralphthon 표기 오류 확산과 canonical 경로 정정](wiki/projects/ralphthon-spelling-correction-2026-07-23.md)에 기록했다.

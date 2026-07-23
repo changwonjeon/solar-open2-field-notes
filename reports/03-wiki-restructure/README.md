@@ -236,17 +236,19 @@ Solar Open 2가 후속 완료 보고를 제출한 뒤 현재 작업 트리를 �
 - Task 02 README와 회의록 index가 보호 규칙과 충돌한 채 변경됨
 - 기존 Codex 테스트 65개 중 62개 통과, 1개 실패, 2개 오류
 
-이어진 감사 도중 별도의 Solar/Claude Code 프로세스가 작업을 계속해 변경 범위가 39개 파일, 357 insertions와 208 deletions로 확대됐다. `src/scripts/ralpthon/`의 실행 스크립트 11개를 `src/scripts/ralphthon/`으로 옮기는 rename이 staging됐고 Skill·로그·phase spec도 추가로 수정됐다.
+이어진 감사 도중 별도의 Solar/Claude Code 프로세스가 작업을 계속해 변경 범위가 39개 파일, 357 insertions와 208 deletions로 확대됐다. 잘못된 철자의 실행 스크립트 디렉터리를 canonical `src/scripts/ralphthon/`으로 옮기는 11개 rename이 staging됐고 Skill·로그·phase spec도 추가로 수정됐다.
 
 중간 단계에서는 다음 새 오류도 잠시 관찰됐다.
 
-- 루트 AGENTS가 실제 `ralphthon/`을 `ralpthon/`으로 잘못 표기
+- 루트 AGENTS에서 Ralphthon 실행 경로의 철자를 다시 잘못 표기
 - `.gitignore`가 존재하는 `solar-ralph/` 대신 존재하지 않는 `solar-ralphthon/`을 추적 예외로 지정
 
 후속 rename은 첫 번째 철자 문제를 수정하려는 과정으로 보이지만, 감사 중 상태가 바뀌었으므로 최종 결과로 판정하지 않는다. 이 관찰은 두 가지를 보여준다.
 
 1. Solar Open 2가 외부 감사의 구체적 오류를 바탕으로 넓은 범위의 후속 수정을 수행하고 있다.
 2. 작업 트리 동결 없이 검증과 수정을 동시에 진행해 완료 판정의 재현성이 다시 훼손됐다.
+
+사용자가 공식 표기를 확인한 뒤 Codex가 Task 01·Wiki·실행 스크립트·Skill·결과 폴더의 이름과 참조를 전수 정정했다. 이 개입은 Solar Open 2의 Task 03 성과로 귀속하지 않으며, 오타 확산의 Git 근거와 정정 범위는 [별도 특이사항 기록](../../wiki/projects/ralphthon-spelling-correction-2026-07-23.md)에 보존한다.
 
 따라서 최신 상태는 **작업 진행 중·최종 gate 판정 보류**다. Solar 프로세스가 완전히 종료된 뒤 새 HEAD와 worktree manifest를 고정하고 전체 검증을 처음부터 다시 수행해야 한다.
 

@@ -89,8 +89,8 @@ source_commit: 6d62228f2d808d33c8921b34b506e40125073e2e
 
 ```text
 docs/experiments/ralphthon/
-src/scripts/ralpthon/
-data/results/ralpthon/
+src/scripts/ralphthon/
+data/results/ralphthon/
 data/datasets/ralphthon-mock/
 ```
 

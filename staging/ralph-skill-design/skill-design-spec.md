@@ -89,7 +89,7 @@ Solar Open 2는 `_Upstage/.claude/skills/` 아래에 다음 구조를 만든다.
 runtime 결과 디렉터리에는 다음 파일을 둔다.
 
 ```text
-data/results/ralpthon/solar/<run-id>/
+data/results/ralphthon/solar/<run-id>/
 ├── run-state.json
 ├── failure-ledger.jsonl
 ├── events.jsonl
