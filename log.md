@@ -8,6 +8,13 @@ timestamp: 2026-07-17T11:50:35+09:00
 
 # Solar Open 2 Field Notes Log
 
+## 2026-07-23 — Task 03 후속 수정 중 재검증
+
+- 완료 보고 직후 Task 03을 다시 감사했으나 Step 3 상태, blob 수, 링크 분류, 보호 범위와 기존 테스트 실패가 남아 있음을 확인했다.
+- 감사 도중 Solar/Claude Code 후속 세션이 작업을 재개해 변경 범위가 19개 tracked 파일에서 39개 파일로 확대되고 Ralphthon 실행 스크립트 rename이 staging됐다.
+- 수정과 검증이 동시에 진행되는 이동 상태이므로 최종 PASS/FAIL을 보류하고, Task 01의 현재 실행 가능성도 migration 종료 뒤 다시 검사하도록 보고서를 갱신했다.
+- Task 02의 원래 회의록과 Task 04 앱 평가는 유지하되, 공통 저장소의 최종 commit 준비 여부와 분리했다.
+
 ## 2026-07-23 — Solar Open 2 Claude Code 실사용 성능 보고서 구성
 
 - `_Upstage`의 네 가지 task를 Claude Code 모델 대체 가능성 관점에서 다시 감사했다.

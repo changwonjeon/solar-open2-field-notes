@@ -11,34 +11,26 @@ Upstage **Solar Open 2**를 실제 에이전트 환경에서 사용하며 얻은
 
 ## 현재 진행 상황
 
-2026년 7월 20일 03시 58분(KST) 기준, Solar Open 2 + Claude Code 조합의 3시간 Ralph Loop 본 실행은 아직 시작하지 않았다. 7월 17일 실행 시도는 tmux 세션, 경로 계산, 프롬프트 주입, 기록기 연결과 checkpoint 계약이 안정적으로 결합되지 않아 유효한 3시간 실행으로 인정할 수 없었다.
-
-현재는 실패를 모델 성능 결과로 오인하지 않기 위해 실행 스택을 먼저 정비하고 있다. Solar Open 2가 생성한 프로젝트 스킬 `/solar-ralph`와 `/git-checkpoint`는 `_Upstage/.claude/skills/`에 만들어졌고 Claude Code의 help 호출로 발견 여부를 확인했다. 이후 Codex는 별도 기록 공간에서 설계와 diff를 검토하고, Solar Open 2가 `_Upstage` 안의 파일을 직접 수정하는 방식으로 출처를 분리했다.
-
-7월 20일에는 `preflight.sh`와 `commit-gate.sh`의 blocker 7건을 수정하고, 격리된 임시 Git 저장소에서 첫 checkpoint의 preflight, 승인 경로 staging, local commit과 성공 JSON 출력까지 검증했다. 현재 남은 핵심 과제는 다음과 같다.
-
-- 임시 Git 저장소에서 후속 checkpoint, 재시도, 실패 및 cleanup 경로를 비파괴적으로 검증
-- recorder, checkpoint monitor와 watchdog을 launcher에 실제 연결한 뒤 10분 soak test와 30분 rehearsal 수행
-- 위 검증을 통과하고 사용자 승인을 받은 뒤에만 3시간 본 실행 시작
-
-비교 대상은 Codex 단독이 아니다. **GPT 계열 모델+Codex**, **Claude 계열 모델+Claude Code** 같은 프론티어 에이전트 조합과 **Solar Open 2+Claude Code**를 같은 목표, 시간, 도구 계약과 산출물 기준에서 비교한다. Solar Open 2는 추격자 관점에서 장시간 자율 실행의 성능뿐 아니라 스킬 계약 이해, Git 안전성, 실패 복구, 상태 보고 정확도와 사용자 개입 비용을 개선할 수 있는 인사이트를 도출하는 것이 핵심이다.
-
-상세 진행 기록: [Ralph Loop 스킬 설계와 실행 전 검증](wiki/projects/ralph-skill-stack-validation.md)
-
-7월 20일까지의 종합 타임라인: [`_Upstage` 작업 내역 정리 — 2026년 7월 20일까지](wiki/projects/upstage-work-summary-through-2026-07-20.md)
-
-## Solar Open 2 실사용 성능 평가
-
 Solar Open 2를 Claude Code CLI의 모델 백엔드로 사용한 네 가지 실제 태스크를 근거 중심으로 평가했다. 일반 벤치마크 점수가 아니라 요구사항 이해, 도구 사용, 환경 적응, 오류 복구, 자기검증, 처리 시간과 사용자 개입 비용을 기준으로 삼았다.
+
+> **2026-07-23 재검증 업데이트:** Task 03의 수정 작업이 다시 시작돼 감사 도중 작업 트리가 19개 tracked 변경에서 39개 파일 규모로 변했고, Ralphthon 실행 스크립트 11개 rename이 staging됐다. 따라서 아래 Task 03 평가는 완료 결과가 아니라 이전 실패 상태와 현재 진행 중인 복구 과정을 함께 반영한다. 작업이 멈춘 뒤 최종 gate를 다시 검사해야 한다.
 
 | 태스크 | 현재 판단 | 관측 시간 | Claude Code 대체 관점의 요약 |
 | --- | --- | --- | --- |
-| [01 — Ralphthon 재현](reports/01-ralpthon/README.md) | 본 과제 성능 판정 불가 | Solar 본 실행 없음 | Solar 백엔드 기동과 일부 안전 게이트는 확인했지만 유효한 본 실행은 없다. Codex용 목표를 Claude Code로 옮기는 과정에서 상당한 Plugin·런처·환경 변환 비용이 발생했다. |
-| [02 — 회의록 작성](reports/02-meeting-minutes/README.md) | 조건부 대체 가능 | 미측정 | 한국어 다문서 취합과 계층적 구조화는 강점이다. 사실 귀속과 추론성 재분류에는 사람의 검수가 필요하다. |
-| [03 — Wiki 구조 재편](reports/03-wiki-restructure/README.md) | 보조 도구 수준 | 미측정 | 대규모 파일 처리와 작업 분해는 강했지만 보호 범위, 지시 준수와 최종 검증 신뢰성 문제로 독립 실행에는 강한 감독이 필요하다. |
-| [04 — 토크나이저 비교](reports/04-tokenizer-comparison/README.md) | 보조 도구 수준 | 주 세션 약 91분, 겹치는 후속 약 26분 | 발표용 프로토타입을 구성했지만 핵심 토큰 수 검증에 오류가 있어 비교 결과를 그대로 사용할 수 없다. |
+| [01 — Ralphthon 재현 (장시간 에이전트 실행·환경 이식)](reports/01-ralpthon/README.md) | 본 과제 성능 판정 불가 | Solar 본 실행 없음 | Codex용 장시간 자율 작업을 Claude Code 환경으로 이식하는 난도와 실행 준비도를 시험한다. Solar 백엔드 기동과 일부 안전 게이트는 확인했지만 유효한 본 실행은 없다. |
+| [02 — 회의록 작성 (문서 요약·생성)](reports/02-meeting-minutes/README.md) | 해당 범위에서 대체 가능 | 미측정 | 범용 LLM의 기본 업무인 한국어 다문서 취합·요약·구조화를 시험했으며, 문제없이 실용적인 결과를 완성했다. |
+| [03 — Wiki 구조 재편 (에이전트 도구 사용·저장소 정리)](reports/03-wiki-restructure/README.md) | 감독하에 조건부 대체 가능·후속 검증 중 | 미측정 | 복잡한 migration에서 파일 탐색·이동, Git 및 검증 도구 사용, 지시 유지 능력을 시험한다. 대규모 정리를 수행했고 외부 감사 지적에도 후속 대응하고 있다. |
+| [04 — 토크나이저 비교 (코딩 능력)](reports/04-tokenizer-comparison/README.md) | 프로토타입 코딩·디버깅에 대체 가능 | 주 세션 약 91분, 겹치는 후속 약 26분 | 요구사항 분석, 앱 설계, 외부 라이브러리 통합과 디버깅 능력을 시험했다. 실행 가능한 Streamlit 앱을 만들었고 전문 수치는 oracle 테스트로 보강하면 된다. |
 
-실제 사용감은 비교적 선명하다. 범위가 명확한 문서 통합과 프로토타입 초안에서는 생산적이었지만, 장시간 자율 실행이나 저장소 전체를 바꾸는 작업에서는 지시 유지와 자기검증이 약해졌다. 현재 Solar Open 2는 Claude Code의 모든 역할을 그대로 대체하기보다, 허용 범위를 좁히고 테스트·diff·사람 검수를 붙였을 때 효율적인 실행 모델에 가깝다. 직접 Claude 대조군이 없는 태스크에서는 동등성이나 우위를 주장하지 않는다.
+**(Task 01 — 장시간 에이전트 실행·환경 이식)** Codex가 랄프톤에서 수행한 Ralph Loop를 Solar Open 2 + Claude Code로 재현하려는 실험이다. 서로 다른 CLI·Plugin·Skill 계약을 변환하고 장시간 자율 실행이 가능한지 확인한다는 데 의미가 있다. Solar 백엔드 기동, 프로젝트 Skill 발견과 첫 checkpoint 성공 경로까지 확인했지만 유효한 본 실행은 아직 없다. 상세: [`reports/01-ralpthon/README.md`](reports/01-ralpthon/README.md)
+
+**(Task 02 — 문서 요약·생성)** 여러 한국어 행사 기록을 읽기 쉬운 종합 회의록과 Q&A 문서로 완성했다. 범용 LLM의 기본 능력인 다문서 취합·요약·생성, 긴 문맥의 구조 유지와 형식 준수를 확인하는 테스트다. 이 범위에서는 Claude 모델을 실용적으로 대체할 수 있다고 평가한다. 상세: [`reports/02-meeting-minutes/README.md`](reports/02-meeting-minutes/README.md)
+
+**(Task 03 — 에이전트 도구 사용·저장소 정리)** Task 01 원본을 보존하고 Source·Wiki·Output·Schema 계층을 정리하는 복잡한 migration을 단계별로 수행했다. 대규모 파일 탐색·이동, Git과 검사 도구 활용, 여러 단계에 걸친 지시 유지 능력을 확인하는 테스트다. 실질적인 정리 성과와 후속 대응은 긍정적이며 최종 gate는 작업 종료 후 독립 검증한다. 상세: [`reports/03-wiki-restructure/README.md`](reports/03-wiki-restructure/README.md)
+
+**(Task 04 — 코딩 능력)** 발표 목적과 한 화면 비교 요구를 Streamlit 앱 구조로 설계하고, 여러 Hugging Face 토크나이저와 GPT 계열 인코더를 연결해 주 세션 약 91분 동안 실행 가능한 프로토타입을 만들었다. 요구사항 분석, 설계, 외부 라이브러리 통합과 디버깅 능력을 함께 확인하는 테스트다. 전문 비교 수치는 별도의 oracle 테스트로 보강할 영역이다. 상세: [`reports/04-tokenizer-comparison/README.md`](reports/04-tokenizer-comparison/README.md)
+
+**(종합 의견)** Solar Open 2는 범위가 명확한 문서 통합, 대량 파일 처리와 프로토타입 초안에서 실제 생산성을 보여줬다. 장시간 실행과 고위험 저장소 변경에는 테스트·diff·사람 검수를 붙이는 편이 안전하지만, 이는 활용 가치가 낮다는 뜻이 아니라 현재 가장 효과적인 운영 방식에 가깝다. 직접 Claude 대조군이 없는 태스크에서는 동등성이나 우위 대신 확인된 성과와 필요한 감독 수준을 함께 제시한다.
 
 평가 방법과 판정 범례: [실사용 성능 보고서 색인](reports/index.md)
 

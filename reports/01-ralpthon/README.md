@@ -14,11 +14,13 @@ timestamp: 2026-07-23T20:20:00+09:00
 status: preflight-incomplete
 ---
 
-# Task 01 Ralphthon 재현 실험
+# Task 01 Ralphthon 재현 실험 — 장시간 에이전트 실행·환경 이식
 
 ## 요약 판정
 
 Task 01의 목적은 Ralphthon Track 2에서 Codex가 만든 논문 리뷰 에이전트와 그 자율 실행 과정을 Solar Open 2+Claude Code 조합으로 재현하고, 같은 목표와 검증 계약 아래 장시간 에이전트 성능을 비교하는 것이다.
+
+> **평가 컨셉: 장시간 에이전트 실행·환경 이식.** 단순 코드 생성이 아니라 Codex용 plan과 Plugin·Skill·launcher 계약을 Claude Code 환경에 맞게 변환하고, 기록·checkpoint·복구를 유지한 채 장시간 자율 실행할 수 있는지를 확인한다. 서로 다른 에이전트 하네스 사이의 실제 대체 비용을 드러낸다는 점에서 의미가 있다.
 
 현재 증거가 지지하는 판정은 세 가지로 나뉜다.
 
@@ -197,6 +199,19 @@ Task 03은 Wiki와 task 디렉터리 구조를 canonical 형태로 정리하고 
 - Task 03 완료 여부는 Task 01의 R6~R8 통과를 대신하지 않는다.
 
 즉, Task 03은 **증거 보존과 구조 정합화**, Task 01은 **에이전트 실행 및 성능 평가**를 담당한다. 같은 파일을 만졌더라도 성과는 목적과 검증 계약에 따라 한 번만 귀속한다.
+
+## 2026-07-23 재검증 업데이트
+
+Task 03 완료 보고를 다시 확인하는 동안 Ralphthon 실행 스크립트 디렉터리를 `ralpthon`에서 `ralphthon`으로 옮기는 후속 작업이 시작됐다. 감사 중 11개 script rename이 staging됐고 일부 launcher·recorder 파일에는 추가 수정도 생겼다. 이는 이전의 철자와 canonical 경로 불일치를 바로잡으려는 작업으로 보이지만, 변경 중인 상태에서는 launcher가 처음부터 끝까지 실행된다고 판단할 수 없다.
+
+같은 시점에 보존된 Codex 테스트를 다시 실행한 결과는 65개 중 62개 통과, 1개 실패, 2개 오류로 이전 감사와 같았다. 누락된 evidence와 staging 자료를 요구하는 테스트가 계속 실패한다.
+
+따라서 현재 준비도는 다음처럼 갱신한다.
+
+- 원본과 실행 경로를 정리하는 작업은 계속 진행 중이다.
+- R6 이후의 실패 복구·runtime 통합·rehearsal은 여전히 입증되지 않았다.
+- 진행 중인 rename을 Task 01의 성능 향상이나 회귀로 미리 판정하지 않는다.
+- migration이 끝난 뒤 clean snapshot에서 경로 검사, 전체 테스트와 launcher smoke test를 다시 수행해야 한다.
 
 ## 본 실행 측정 기준
 
