@@ -8,6 +8,32 @@ timestamp: 2026-07-17T11:50:35+09:00
 
 # Solar Open 2 Field Notes Log
 
+## 2026-07-28 — Task 06 Mission 1 마감
+
+- 실행 중인 Mission 프로세스가 없는 상태에서 이번 실험을 마감했다.
+- Level 1 기준선 10회, prompt v1~v3 세 개선 회차, v4 rollback과 Level 2 GGG·GGS·GSG 실행까지 완료했다.
+- v2는 tag-filter에서 GGG 71.555초, GGS 94.221초, GSG 65.641초로 정확성을 유지하면서 기준선보다 시간을 줄였다. v3는 token과 호출을 일관되게 개선하지 못해 제거했다.
+- Level 2 AJAX에서 GGG는 `year` 타입 오류로 content fail, GGS는 결과 파일 누락으로 persistence fail, Solar Navigator 조건인 GSG는 정확한 3건과 value accuracy 1.0으로 유일하게 완전 통과했다.
+- 최종 평가는 Solar Open 2가 Level 1의 세 개별 역할에서 Gemini를 충분히 대체 가능하고, 특히 Navigator는 Level 2까지 강한 대체 후보라는 것이다. Solar Coder는 동적 실행·저장 guardrail이 필요하다.
+- 전체 Solar 팀은 결과 생성은 가능하지만 종료 반복과 지연을 보완하는 조건부 대체 단계로 기록한다.
+- Mission 2 Analyst와 Mission 3 고도화는 미실행 상태로 남겼다.
+- Wiki: [AAWS에서 Solar Open 2 API 에이전트 역할 평가](wiki/projects/aaws-solar-api-agent-evaluation-2026-07-28.md)
+
+## 2026-07-28 — Task 06 AAWS Solar Open 2 API 에이전트 평가 진행
+
+- Task 06은 Claude Code가 아니라 LangGraph/LangChain 기반 AAWS에서 Upstage API로 `solar-open2`를 호출하는 역할별 에이전트 실험이다.
+- `Mission_upstage.md`를 기준으로 Supervisor, Navigator, Coder를 `GGG`, `SSS`, `SGG`, `GSG`, `GGS` 조건으로 분리 평가하도록 구성했다.
+- 기본 `uv run`은 잘못된 상위 가상환경을 선택해 실패했고, 로컬 `.venv` Python을 직접 사용한 세 번째 사전 검사에서 Solar API 호출이 종료 코드 0으로 성공했다.
+- 업데이트된 미션은 기존 Gemini 기능과 멀티모달 단계를 유지하고, Solar는 공통 텍스트 역할 또는 선택한 텍스트 노드에 추가하는 A/B 구조로 범위를 명확히 했다.
+- Mission 1의 첫 단계인 Level 1 두 시나리오 × 5조건 기준선 10회가 완료됐다. 8회는 정상 종료, GGG pagination과 SSS tag-filter는 결과 생성 후 recursion limit에 도달한 partial, 결과 생성 실패는 0회였다.
+- Solar Supervisor(`SGG`), Navigator(`GSG`), Coder(`GGS`) 단독 교체 조건은 각각 두 시나리오를 모두 정상 종료했다. 평균 시간은 GSG 85.262초, SGG 86.360초, GGS 104.398초였다.
+- 전체 Solar 팀(`SSS`)은 1 success/1 partial, 평균 228.553초로 GGG 평균 89.218초의 약 2.56배였다. tag-filter에서 결과 13건을 만든 뒤 recursion 60까지 반복했다.
+- pagination의 다섯 조건은 byte-identical한 50건을 만들었다. tag-filter는 GSG만 바깥 인용부호 표현이 달랐으며 이를 정규화하면 다섯 조건 모두 같은 13개 레코드였다.
+- Solar 관점의 현재 평가는 Level 1의 Supervisor·Navigator·Coder 개별 역할에서 Gemini를 충분히 대체 가능하다는 것이다. 전체 Solar 팀도 결과 생성 능력은 확인됐으며, 완료 후 종료와 API 지연을 prompt tuning으로 보완하는 조건부 대체 가능 단계로 본다.
+- 이 기준선은 역할별 적용 가능성과 prompt 개선 지점을 찾는 탐색 실험으로는 유효하다. 하지만 조건별 1회, live 순차 실행, GGG pagination의 recursion 25 대 나머지 60, 중간 evaluator 수정, baseline prompt hash 부재와 비대칭 token 계측 때문에 Gemini/Solar 우열을 확정하는 벤치마크는 아니다.
+- 기준선 분석은 `SSS`, `GGS`, `GSG`를 대표 조건으로 선정했다. 성공 후 즉시 종료와 호출 예산을 추가한 prompt v1 Round 1이 관찰 종료 시점에 실행 중이었다.
+- 상세 보고서: [Task 06 — AAWS Solar Open 2 API 에이전트 평가](reports/06-practice-aaws/README.md)
+
 ## 2026-07-24 — Task 05 Ralphthon 철자 오류 재현 실험 계획
 
 - 정확한 표기 `Ralphthon`과 canonical slug `ralphthon`을 기준으로 Solar Open 2의 철자 보존·추론·교정과 저장소 내 오타 확산을 분리 측정하는 실험을 설계했다.

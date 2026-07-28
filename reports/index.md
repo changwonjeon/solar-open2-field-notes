@@ -1,14 +1,14 @@
 ---
 type: Index
-title: Solar Open 2 Claude Code 실사용 성능 보고서
-description: Claude Code의 모델 백엔드로 Solar Open 2를 사용한 네 가지 완료 태스크와 한 가지 계획 태스크의 근거 기반 평가 색인
+title: Solar Open 2 실사용 성능 보고서
+description: Claude Code 및 LangGraph/LangChain 환경에서 Solar Open 2를 사용한 완료·계획·준비 태스크의 근거 기반 평가 색인
 tags: [solar-open2, claude-code, evaluation, field-report]
 timestamp: 2026-07-23T00:00:00+09:00
 ---
 
-# Solar Open 2 Claude Code 실사용 성능 보고서
+# Solar Open 2 실사용 성능 보고서
 
-이 보고서 묶음은 Solar Open 2를 Claude Code CLI의 모델 백엔드로 사용했을 때 Claude 계열 모델을 어느 범위까지 대체할 수 있는지 실제 작업 기록을 바탕으로 평가한다. 일반 벤치마크 점수 대신 요구사항 이해, 도구 사용, 환경 적응, 오류 복구, 자기검증, 처리 시간과 사용자 개입 비용을 살핀다.
+이 보고서 묶음은 Solar Open 2의 실제 작업 성능을 실행 환경별로 평가한다. Task 01~05는 주로 Claude Code CLI의 모델 백엔드로 사용한 기록이며, Task 06은 별도로 LangGraph/LangChain에서 Upstage API를 통해 Solar Open 2를 호출하는 AAWS 실습이다. 일반 벤치마크 점수 대신 요구사항 이해, 도구 사용, 환경 적응, 오류 복구, 자기검증, 처리 시간과 사용자 개입 비용을 살핀다.
 
 태스크마다 목적과 성공 기준이 다르므로 하나의 종합 점수로 서열화하지 않는다. 측정되지 않은 항목은 0점이 아니라 `N/A`로 표시하며, Solar Open 2의 모델 행동과 CLI·Plugin·운영 환경 문제를 구분한다. 다만 사용자가 실제로 부담한 변환과 감독은 대체 비용에 포함한다.
 
@@ -19,6 +19,7 @@ timestamp: 2026-07-23T00:00:00+09:00
 - [Task 03 — Wiki 구조 재편 (에이전트 도구 사용·저장소 정리)](03-wiki-restructure/README.md): 대규모 파일·Git 작업에서의 도구 사용, 지시 준수와 자기검증
 - [Task 04 — 토크나이저 비교 (코딩 능력)](04-tokenizer-comparison/README.md): 발표 요구를 앱으로 구체화한 설계·구현·통합·디버깅 능력
 - [Task 05 — Ralphthon 철자 오류 재현 (명칭 보존·교정)](05-ralphthon-spelling-evaluation/README.md): 신조어 철자 추론과 명시된 canonical 철자의 보존, 저장소 작업 중 오타 확산을 구분하는 계획 실험
+- [Task 06 — AAWS Solar Open 2 API 에이전트 평가 (웹 수집 멀티에이전트)](06-practice-aaws/README.md): Mission 1 기준선·prompt tuning·Level 2를 통해 확인한 역할별 Gemini 대체 가능성과 최종 관찰
 
 ## 판정 범례
 

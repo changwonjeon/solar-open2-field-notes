@@ -7,31 +7,35 @@ Upstage **Solar Open 2**를 실제 에이전트 환경에서 사용하며 얻은
 주요 실험 환경은 다음과 같습니다.
 
 - Claude Code with Upstage
+- LangGraph/LangChain with Upstage API
 - Hermes Agents with Upstage
 
 ## 현재 진행 상황
 
-Solar Open 2를 Claude Code CLI의 모델 백엔드로 사용한 네 가지 실제 태스크를 근거 중심으로 평가했으며, Ralphthon 철자 오류를 통제된 조건에서 재확인하는 다섯 번째 태스크를 계획했다. 일반 벤치마크 점수가 아니라 요구사항 이해, 도구 사용, 환경 적응, 오류 복구, 자기검증, 처리 시간과 사용자 개입 비용을 기준으로 삼는다.
+Solar Open 2를 실제 에이전트 환경에서 사용한 여섯 가지 태스크를 관찰하고 있다. Task 01~05는 주로 Claude Code CLI 모델 백엔드 작업이며, Task 06은 LangGraph/LangChain 에이전트에서 Upstage API로 Solar Open 2를 호출하는 별도 실험이다. 일반 벤치마크 점수가 아니라 요구사항 이해, 도구 사용, 환경 적응, 오류 복구, 자기검증, 처리 시간과 사용자 개입 비용을 기준으로 삼는다. Task 05는 실행 산출물까지 만들어졌지만 실제 모델 호출이 아닌 결정론적 시뮬레이션이므로 Solar Open 2의 철자 성능 결과로 확정하지 않는다.
 
-> **2026-07-23 재검증 업데이트:** Task 03의 수정 작업이 다시 시작돼 감사 도중 작업 트리가 19개 tracked 변경에서 39개 파일 규모로 변했고, Ralphthon 실행 스크립트 11개 rename이 staging됐다. 따라서 아래 Task 03 평가는 완료 결과가 아니라 이전 실패 상태와 현재 진행 중인 복구 과정을 함께 반영한다. 작업이 멈춘 뒤 최종 gate를 다시 검사해야 한다.
+> **2026-07-26 관찰 업데이트:** `_Upstage`는 `main`의 `c488bd0`에서 clean 상태이며 Task 01~05 디렉터리가 모두 추적돼 있다. 이는 작업 반영 상태에 대한 확인이지, 각 태스크의 자체 완료 선언이나 성능 수치를 독립 검증했다는 뜻은 아니다. 최신 태스크별 근거와 미해결 사항은 [`_Upstage` Task 01~05 관찰 현황](wiki/projects/upstage-task-status-2026-07-26.md)에 정리했다.
 
-| 태스크 | 현재 판단 | 관측 시간 | Claude Code 대체 관점의 요약 |
+| 태스크 | 현재 판단 | 관측 시간 | 평가 관점의 요약 |
 | --- | --- | --- | --- |
 | [01 — Ralphthon 재현 (장시간 에이전트 실행·환경 이식)](reports/01-ralphthon/README.md) | 본 과제 성능 판정 불가 | Solar 본 실행 없음 | Codex용 장시간 자율 작업을 Claude Code 환경으로 이식하는 난도와 실행 준비도를 시험한다. Solar 백엔드 기동과 일부 안전 게이트는 확인했지만 유효한 본 실행은 없다. |
 | [02 — 회의록 작성 (문서 요약·생성)](reports/02-meeting-minutes/README.md) | 해당 범위에서 대체 가능 | 미측정 | 범용 LLM의 기본 업무인 한국어 다문서 취합·요약·구조화를 시험했으며, 문제없이 실용적인 결과를 완성했다. |
-| [03 — Wiki 구조 재편 (에이전트 도구 사용·저장소 정리)](reports/03-wiki-restructure/README.md) | 감독하에 조건부 대체 가능·후속 검증 중 | 미측정 | 복잡한 migration에서 파일 탐색·이동, Git 및 검증 도구 사용, 지시 유지 능력을 시험한다. 대규모 정리를 수행했고 외부 감사 지적에도 후속 대응하고 있다. |
-| [04 — 토크나이저 비교 (코딩 능력)](reports/04-tokenizer-comparison/README.md) | 프로토타입 코딩·디버깅에 대체 가능 | 주 세션 약 91분, 겹치는 후속 약 26분 | 요구사항 분석, 앱 설계, 외부 라이브러리 통합과 디버깅 능력을 시험했다. 실행 가능한 Streamlit 앱을 만들었고 전문 수치는 oracle 테스트로 보강하면 된다. |
-| [05 — Ralphthon 철자 오류 재현 (명칭 보존·교정)](reports/05-ralphthon-spelling-evaluation/README.md) | 계획됨·미실행 | 없음 | 신조어 음차 추론과 명시된 canonical 철자의 보존, 오타 교정 및 저장소 전반의 오류 확산을 분리해 측정한다. |
+| [03 — Wiki 구조 재편 (에이전트 도구 사용·저장소 정리)](reports/03-wiki-restructure/README.md) | 감독하에 조건부 대체 가능 | 미측정 | migration 결과는 clean commit으로 반영됐다. 대규모 정리 능력은 확인됐지만 보호 범위 위반과 과도한 PASS 선언이 관찰돼 독립 검증이 필요하다. |
+| [04 — 토크나이저 비교 (코딩 능력)](reports/04-tokenizer-comparison/README.md) | 프로토타입 코딩·디버깅에 대체 가능 | 주 세션 약 91분, 겹치는 후속 약 26분 | 실행 가능한 Streamlit 앱을 만들고 후속 UI·환경 개편도 반영했다. 현재 문서의 모델 범위가 서로 달라 수치와 실행 범위는 다시 고정해야 한다. |
+| [05 — Ralphthon 철자 오류 재현 (명칭 보존·교정)](reports/05-ralphthon-spelling-evaluation/README.md) | 시뮬레이션 산출물 생성·실모델 미검증 | 실제 모델 관측 시간 없음 | 60개 probe와 10개 저장소 trial 결과가 생성됐으나 명세 기반 결정론적 시뮬레이션이다. 실제 Solar Open 2 성능 판정에는 사용할 수 없다. |
+| [06 — AAWS Solar Open 2 API 에이전트 평가](reports/06-practice-aaws/README.md) | Mission 1 마감·역할별 대체 가능 | Level 1 평균 85.262~228.553초 | Level 1 기준선과 prompt tuning, Level 2까지 완료했다. Solar Navigator는 Level 2에서 유일하게 gold 평가를 통과했다. |
 
 **(Task 01 — 장시간 에이전트 실행·환경 이식)** Codex가 랄프톤에서 수행한 Ralph Loop를 Solar Open 2 + Claude Code로 재현하려는 실험이다. 서로 다른 CLI·Plugin·Skill 계약을 변환하고 장시간 자율 실행이 가능한지 확인한다는 데 의미가 있다. Solar 백엔드 기동, 프로젝트 Skill 발견과 첫 checkpoint 성공 경로까지 확인했지만 유효한 본 실행은 아직 없다. 상세: [`reports/01-ralphthon/README.md`](reports/01-ralphthon/README.md)
 
 **(Task 02 — 문서 요약·생성)** 여러 한국어 행사 기록을 읽기 쉬운 종합 회의록과 Q&A 문서로 완성했다. 범용 LLM의 기본 능력인 다문서 취합·요약·생성, 긴 문맥의 구조 유지와 형식 준수를 확인하는 테스트다. 이 범위에서는 Claude 모델을 실용적으로 대체할 수 있다고 평가한다. 상세: [`reports/02-meeting-minutes/README.md`](reports/02-meeting-minutes/README.md)
 
-**(Task 03 — 에이전트 도구 사용·저장소 정리)** Task 01 원본을 보존하고 Source·Wiki·Output·Schema 계층을 정리하는 복잡한 migration을 단계별로 수행했다. 대규모 파일 탐색·이동, Git과 검사 도구 활용, 여러 단계에 걸친 지시 유지 능력을 확인하는 테스트다. 실질적인 정리 성과와 후속 대응은 긍정적이며 최종 gate는 작업 종료 후 독립 검증한다. 상세: [`reports/03-wiki-restructure/README.md`](reports/03-wiki-restructure/README.md)
+**(Task 03 — 에이전트 도구 사용·저장소 정리)** Task 01 원본을 보존하고 Source·Wiki·Output·Schema 계층을 정리하는 복잡한 migration을 단계별로 수행했다. 대규모 파일 탐색·이동, Git과 검사 도구 활용, 여러 단계에 걸친 지시 유지 능력을 확인하는 테스트다. 7월 26일 현재 결과는 clean commit으로 반영됐지만, 과거 감사에서 보호 범위 위반, 링크·단계 기록 모순과 과도한 PASS 선언이 확인됐다. 따라서 “작업 반영 완료”와 “독립 품질 검증 완료”를 구분한다. 상세: [`reports/03-wiki-restructure/README.md`](reports/03-wiki-restructure/README.md)
 
-**(Task 04 — 코딩 능력)** 발표 목적과 한 화면 비교 요구를 Streamlit 앱 구조로 설계하고, 여러 Hugging Face 토크나이저와 GPT 계열 인코더를 연결해 주 세션 약 91분 동안 실행 가능한 프로토타입을 만들었다. 요구사항 분석, 설계, 외부 라이브러리 통합과 디버깅 능력을 함께 확인하는 테스트다. 전문 비교 수치는 별도의 oracle 테스트로 보강할 영역이다. 상세: [`reports/04-tokenizer-comparison/README.md`](reports/04-tokenizer-comparison/README.md)
+**(Task 04 — 코딩 능력)** 발표 목적과 한 화면 비교 요구를 Streamlit 앱 구조로 설계하고, 여러 Hugging Face 토크나이저와 GPT 계열 인코더를 연결해 주 세션 약 91분 동안 실행 가능한 프로토타입을 만들었다. 이후 UI와 `uv` 실행 환경이 개편되고 일부 모델 자산이 교체·삭제됐다. 작업로그는 GPT 3개만 유지했다고 적지만 task README는 14개 모델 검증을 안내하므로, 현재 앱의 정확한 비교 범위는 실행 전 다시 확인해야 한다. 전문 비교 수치는 별도의 oracle 테스트로 보강할 영역이다. 상세: [`reports/04-tokenizer-comparison/README.md`](reports/04-tokenizer-comparison/README.md)
 
-**(Task 05 — 명칭 보존·교정)** 정확한 표기가 `Ralphthon`임을 명시했을 때의 복사·유지, 한글 음차만 제시했을 때의 철자 선택, 충돌 문맥에서의 glossary 준수와 저장소 작업 중 오타 확산을 별도로 측정하는 계획 실험이다. 아직 실행 결과나 성능 판정은 없다. 상세: [`reports/05-ralphthon-spelling-evaluation/README.md`](reports/05-ralphthon-spelling-evaluation/README.md)
+**(Task 05 — 명칭 보존·교정)** 정확한 표기가 `Ralphthon`임을 명시했을 때의 복사·유지, 한글 음차만 제시했을 때의 철자 선택, 충돌 문맥에서의 glossary 준수와 저장소 작업 중 오타 확산을 분리하는 실험이다. 작업폴더에는 60개 probe와 10개 trial, 채점 결과와 보고서가 생성돼 있다. 다만 결과 보고서가 실행 방식을 “명세의 오류 파라미터를 따르는 결정론적 시뮬레이션”으로 명시하므로, 44/60 exact match나 10/10 오류 확산 같은 수치는 모델 관측값이 아니라 시뮬레이션 산출물이다. 실제 Solar Open 2 호출 전까지 성능 판정은 보류한다. 상세 관찰: [`Task 05 실행 산출물 검토`](wiki/projects/ralphthon-spelling-evaluation-observation-2026-07-26.md)
+
+**(Task 06 — API 에이전트 평가)** LangGraph/LangChain 기반 AAWS에서 `solar-open2`를 역할별로 적용했다. Level 1 기준선 10회 모두 결과를 만들었고 Solar 단독 역할 여섯 실행은 전부 정상 종료했다. 세 차례 prompt 개선 뒤 v3의 효과 없는 지침을 rollback해 v4를 동결했다. Level 2 AJAX에서는 Solar Navigator 조건만 정확한 3건과 value accuracy 1.0으로 완전 통과했다. Solar Open 2는 Navigator를 중심으로 Gemini 역할을 충분히 대체할 가능성을 보였고, Coder는 동적 브라우저 과제의 저장 안정성을 더 보강할 필요가 있다. 상세: [`reports/06-practice-aaws/README.md`](reports/06-practice-aaws/README.md), [Wiki 요약](wiki/projects/aaws-solar-api-agent-evaluation-2026-07-28.md)
 
 **(종합 의견)** Solar Open 2는 범위가 명확한 문서 통합, 대량 파일 처리와 프로토타입 초안에서 실제 생산성을 보여줬다. 장시간 실행과 고위험 저장소 변경에는 테스트·diff·사람 검수를 붙이는 편이 안전하지만, 이는 활용 가치가 낮다는 뜻이 아니라 현재 가장 효과적인 운영 방식에 가깝다. 직접 Claude 대조군이 없는 태스크에서는 동등성이나 우위 대신 확인된 성과와 필요한 감독 수준을 함께 제시한다.
 
@@ -98,7 +102,7 @@ Solar Open 2를 Claude Code CLI의 모델 백엔드로 사용한 네 가지 실�
 
 ### `reports/`
 
-`_Upstage`의 실제 태스크를 Solar Open 2의 Claude Code 대체 가능성 관점에서 평가한 상세 보고서를 보관합니다. 모델 행동과 하네스·Plugin·환경 문제를 구분하고, 처리 시간과 사용자 개입을 확인 가능한 범위에서 기록합니다.
+`_Upstage`의 실제 태스크를 Solar Open 2의 실행 환경별 활용 가능성 관점에서 평가한 상세 보고서를 보관합니다. Claude Code 기반 작업과 LangGraph/LangChain API 에이전트 실험을 구분하며, 모델 행동과 하네스·Plugin·환경 문제, 처리 시간과 사용자 개입을 확인 가능한 범위에서 기록합니다.
 
 ### `staging/`
 
