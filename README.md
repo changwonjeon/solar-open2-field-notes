@@ -1,171 +1,190 @@
-# Solar Open 2 Field Notes
+# Solar Open 2 실사용 평가 보고서
 
-Upstage **Solar Open 2**를 실제 에이전트 환경에서 사용하며 얻은 경험을 기록하는 공개 지식 저장소입니다.
+Upstage **Solar Open 2**를 실제 에이전트와 개발 환경에서 사용하며 확인한 성과, 실행 과정과 운영상 교훈을 정리한 보고서입니다.
 
-실제 코드 실행과 실험은 별도 로컬 작업 공간인 `_Upstage`에서 진행합니다. 이 저장소는 Codex를 이용해 그 과정에서 나온 캡처, 코드 스니펫, 실행 결과, 시행착오, 해석과 후기를 정리하고 연결하는 기록 공간입니다.
+## 요약 결론
 
-주요 실험 환경은 다음과 같습니다.
+**Solar Open 2는 이 보고서에서 관찰한 실제 작업에 유용했습니다.** 문서 통합과 한국어 요약, 대량 파일 처리, 저장소 구조화, 실행 가능한 앱 구현, LangGraph/LangChain 에이전트 역할 수행까지 서로 다른 업무에서 구체적인 결과물을 만들었습니다. 특히 작업 범위와 완료 조건이 명확할 때 초안을 만들고, 도구를 사용해 결과를 파일과 코드로 남기는 능력이 재사용 가능한 산출물로 이어졌습니다.
 
-- Claude Code with Upstage
-- LangGraph/LangChain with Upstage API
-- Hermes Agents with Upstage
+대표적으로 여러 한국어 문서를 실무용 회의록으로 통합했고, 복잡한 저장소를 태스크 중심 구조로 재편했으며, 여러 토크나이저를 비교하는 Streamlit 앱을 구현했습니다. 사용자 확인에 따르면 이 앱은 실제 강의에서 유용하게 사용됐습니다. LangGraph/LangChain 기반 실험에서는 Solar Open 2가 Navigator 역할로 단일 Level 2 평가를 통과해 API 에이전트로서의 활용 가능성도 보여줬습니다.
 
-## 현재 진행 상황
+장시간 자율 실행, 고위험 저장소 변경과 전문 수치 검증에는 테스트, Git diff와 사람 검수가 필요했습니다. 이는 활용 가치가 낮다는 결론이 아니라, 현재 Solar Open 2를 가장 효과적으로 사용하는 방식에 가깝습니다.
 
-Solar Open 2를 실제 에이전트 환경에서 사용한 일곱 가지 태스크를 관찰하고 있다. Task 00은 Hermes Agent, Task 01~05는 주로 Claude Code CLI 모델 백엔드 작업이며, Task 06은 LangGraph/LangChain 에이전트에서 Upstage API로 Solar Open 2를 호출하는 별도 실험이다. 일반 벤치마크 점수가 아니라 요구사항 이해, 도구 사용, 환경 적응, 오류 복구, 자기검증, 처리 시간과 사용자 개입 비용을 기준으로 삼는다. Task 00은 감사 보고의 반복 오류 뒤 독립 검증된 상대링크 8개를 제한적으로 수정하는 데 성공했고, Task 05는 실행 산출물까지 만들어졌지만 실제 모델 호출이 아닌 결정론적 시뮬레이션이므로 성능 결과를 확정하지 않는다.
+## 평가 방법과 보고서 작성 전제
 
-> **2026-07-26 관찰 업데이트:** `_Upstage`는 `main`의 `c488bd0`에서 clean 상태이며 Task 01~05 디렉터리가 모두 추적돼 있다. 이는 작업 반영 상태에 대한 확인이지, 각 태스크의 자체 완료 선언이나 성능 수치를 독립 검증했다는 뜻은 아니다. 최신 태스크별 근거와 미해결 사항은 [`_Upstage` Task 01~05 관찰 현황](wiki/projects/upstage-task-status-2026-07-26.md)에 정리했다.
+실제 코드 실행과 실험은 별도 로컬 작업 공간인 `_Upstage`에서 진행했고, 이 저장소에는 공개 가능하고 기록이 남은 산출물, 실행 기록, Git 이력과 분석을 사후 선별해 정리했습니다. 이 사례들은 무작위 표본이 아니며, 사전 등록된 공통 평가표나 모든 태스크의 직접 대조군도 없습니다. 따라서 이 보고서로 Solar Open 2의 일반적인 성공률이나 다른 모델에 대한 우위를 추정하지 않습니다. 일반 벤치마크 점수보다 다음 항목을 중심으로 각 사례를 평가했습니다.
 
-> **2026-07-29 23:51 KST 업데이트:** Task 00에서 Solar Open 2 + Hermes Agent의 저장소 감사와 제한 복구를 완료했다. 넓은 감사 보고는 반복 검증 오류로 `INCOMPLETE/NON_COMPLIANT`였지만, 독립 검증된 링크 8개와 누락 문서 2개, Task 00 색인·timestamp 및 README 구조는 좁은 허용 목록 아래 복구했다. 전체 과정과 운영 교훈은 [Hermes Agent + Solar Open 2 저장소 감사와 제한 복구](wiki/projects/hermes-solar-repository-audit-2026-07-29.md)에 정리했다.
+- 요구사항 이해와 결과물 완성도
+- 파일·Git·브라우저 등 도구 사용
+- 실행 환경 적응과 오류 복구
+- 자기검증과 사용자 개입 비용
+- 결과의 재사용 가능성과 실제 활용 여부
 
-| 태스크 | 현재 판단 | 관측 시간 | 평가 관점의 요약 |
-| --- | --- | --- | --- |
-| [00 — Hermes Agent 저장소 감사](reports/00-hermes/README.md) | 제한 복구 완료 | 미측정 | 링크 8개, 누락 문서 2개, Task 00 log·index·timestamp와 README Task 00~02 구조를 독립 검증과 함께 복구했다. |
-| [01 — Ralphthon 재현 (장시간 에이전트 실행·환경 이식)](reports/01-ralphthon/README.md) | 본 과제 성능 판정 불가 | Solar 본 실행 없음 | Codex용 장시간 자율 작업을 Claude Code 환경으로 이식하는 난도와 실행 준비도를 시험한다. Solar 백엔드 기동과 일부 안전 게이트는 확인했지만 유효한 본 실행은 없다. |
-| [02 — 회의록 작성 (문서 요약·생성)](reports/02-meeting-minutes/README.md) | 해당 범위에서 대체 가능 | 미측정 | 범용 LLM의 기본 업무인 한국어 다문서 취합·요약·구조화를 시험했으며, 문제없이 실용적인 결과를 완성했다. |
-| [03 — Wiki 구조 재편 (에이전트 도구 사용·저장소 정리)](reports/03-wiki-restructure/README.md) | 감독하에 조건부 대체 가능 | 미측정 | migration 결과는 clean commit으로 반영됐다. 대규모 정리 능력은 확인됐지만 보호 범위 위반과 과도한 PASS 선언이 관찰돼 독립 검증이 필요하다. |
-| [04 — 토크나이저 비교 (코딩 능력)](reports/04-tokenizer-comparison/README.md) | 프로토타입 코딩·디버깅에 대체 가능 | 주 세션 약 91분, 겹치는 후속 약 26분 | 실행 가능한 Streamlit 앱을 만들고 후속 UI·환경 개편도 반영했다. 현재 문서의 모델 범위가 서로 달라 수치와 실행 범위는 다시 고정해야 한다. |
-| [05 — Ralphthon 철자 오류 재현 (명칭 보존·교정)](reports/05-ralphthon-spelling-evaluation/README.md) | 시뮬레이션 산출물 생성·실모델 미검증 | 실제 모델 관측 시간 없음 | 60개 probe와 10개 저장소 trial 결과가 생성됐으나 명세 기반 결정론적 시뮬레이션이다. 실제 Solar Open 2 성능 판정에는 사용할 수 없다. |
-| [06 — AAWS Solar Open 2 API 에이전트 평가](reports/06-practice-aaws/README.md) | Mission 1 마감·역할별 대체 가능 | Level 1 평균 85.262~228.553초 | Level 1 기준선과 prompt tuning, Level 2까지 완료했다. Solar Navigator는 Level 2에서 유일하게 gold 평가를 통과했다. |
+이 보고서는 **Codex로 작성하고 검토했습니다.** Solar Open 2로 수행한 실험을 다시 Solar Open 2가 평가하는 자기평가 구조를 피하고, 다른 모델의 관점에서 결과를 후속 검토하기 위해서입니다. 이를 통해 같은 모델의 판단이 반복되면서 결과가 유리하게 해석될 가능성을 줄이고자 했습니다.
 
-**(Task 00 — Hermes Agent 저장소 감사)** Solar Open 2를 Hermes Agent 백엔드로 사용해 `_Upstage`의 Markdown/OKF 무결성을 감사하고 수정하는 실험이다. 초기 감사에서는 모집단·링크 분류·재현 코드와 절차 준수 문제가 반복됐지만, 좁은 허용 목록과 독립 검증을 적용한 후 링크 8개, 누락 snapshot과 LLM-Wiki 가이드, Task 00 log·index·timestamp 및 README Task 00~02 구조를 복구했다. 최종 README hash와 구조, YAML, 링크, diff check를 Codex가 확인했으며 staging·commit·push는 없다. 상세: [Wiki 종합](wiki/projects/hermes-solar-repository-audit-2026-07-29.md), [관찰 보고서](reports/00-hermes/README.md)
+이 **교차모델 후속 검토**는 외부 독립 평가나 블라인드 검증을 의미하지 않습니다. Codex와 Solar Open 2는 같은 사용자가 선택한 자료와 평가 목적을 공유했고, 평가의 사전등록이나 외부 독립 채점자도 없었습니다. 따라서 Codex의 서술만을 근거로 삼지 않고 실제 파일, 실행 산출물, Git diff와 결정론적 검사 결과를 함께 확인했습니다. 직접 대조군이 없는 태스크에서는 Solar Open 2가 다른 모델보다 우수하다고 단정하지 않고, 확인된 성과와 필요한 감독 수준을 기록했습니다.
 
-**(Task 01 — 장시간 에이전트 실행·환경 이식)** Codex가 랄프톤에서 수행한 Ralph Loop를 Solar Open 2 + Claude Code로 재현하려는 실험이다. 서로 다른 CLI·Plugin·Skill 계약을 변환하고 장시간 자율 실행이 가능한지 확인한다는 데 의미가 있다. Solar 백엔드 기동, 프로젝트 Skill 발견과 첫 checkpoint 성공 경로까지 확인했지만 유효한 본 실행은 아직 없다. 상세: [`reports/01-ralphthon/README.md`](reports/01-ralphthon/README.md)
+### 교차모델 후속 검토가 유효했던 사례
 
-**(Task 02 — 문서 요약·생성)** 여러 한국어 행사 기록을 읽기 쉬운 종합 회의록과 Q&A 문서로 완성했다. 범용 LLM의 기본 능력인 다문서 취합·요약·생성, 긴 문맥의 구조 유지와 형식 준수를 확인하는 테스트다. 이 범위에서는 Claude 모델을 실용적으로 대체할 수 있다고 평가한다. 상세: [`reports/02-meeting-minutes/README.md`](reports/02-meeting-minutes/README.md)
+Codex를 별도 후속 검토자로 둔 방식은 단순한 보고서 작성상의 구분에 그치지 않고, 실제 결과를 바로잡는 데 도움이 됐습니다.
 
-**(Task 03 — 에이전트 도구 사용·저장소 정리)** Task 01 원본을 보존하고 Source·Wiki·Output·Schema 계층을 정리하는 복잡한 migration을 단계별로 수행했다. 대규모 파일 탐색·이동, Git과 검사 도구 활용, 여러 단계에 걸친 지시 유지 능력을 확인하는 테스트다. 7월 26일 현재 결과는 clean commit으로 반영됐지만, 과거 감사에서 보호 범위 위반, 링크·단계 기록 모순과 과도한 PASS 선언이 확인됐다. 따라서 “작업 반영 완료”와 “독립 품질 검증 완료”를 구분한다. 상세: [`reports/03-wiki-restructure/README.md`](reports/03-wiki-restructure/README.md)
+- **Task 00:** Hermes Agent에서 Solar Open 2가 수행한 감사에는 모집단, 링크 분류, YAML 검사와 완료 선언의 오류가 반복됐습니다. Codex가 같은 저장소를 별도 명령과 diff로 다시 검사하면서 불일치를 찾아냈고, 수정 범위를 별도 재검사로 확인한 링크와 문서로 좁혔습니다. 그 결과 넓고 불확실한 감사 결과를 그대로 수용하지 않고, 링크 8개와 누락 문서 2개 등 확인 가능한 범위만 안전하게 복구할 수 있었습니다.
+- **Task 05:** `Ralphthon`이 `ralpthon`으로 바뀐 문제가 문서 한 곳의 오타가 아니라 Task 경로, 스크립트와 Skill까지 확산됐음을 Codex가 Git 이력과 전수 재검색으로 확인했습니다. 이후 canonical 이름과 참조를 교정하고, 실제 오류 이력과 결정론적 시뮬레이션 결과를 분리해 평가했습니다. 이 교차모델 후속 검토 덕분에 시뮬레이션 수치를 실제 Solar Open 2 호출 결과로 오해하지 않을 수 있었습니다.
+- **Task 03:** Solar Open 2의 전체 PASS 선언과 실제 보호 범위 위반·잔여 오류가 일치하지 않는 부분을 Codex의 후속 감사가 확인했습니다. 이를 통해 “구조 변경 반영 완료”와 “별도 품질 재검사 완료”를 구분했습니다.
+- **Task 04:** 자체 검증 스크립트가 성공으로 처리한 GPT fallback 값과 Solar 토크나이저의 비정상 출력을 Codex가 직접 계산과 의미 검사로 다시 확인했습니다. 덕분에 실제 강의용 GUI의 유용성과 전문 수치의 정확성 문제를 서로 다른 평가 항목으로 기록할 수 있었습니다.
+- **Task 06:** Codex가 실행 결과 파일과 결정론적 평가 기록을 역할별로 다시 읽어, 전체 Solar 팀의 결과와 Solar Navigator 단독 성과를 분리했습니다. 그 결과 “모든 역할에서 전면 대체 가능”이 아니라 “Navigator 중심의 역할별 활용 가능성”으로 결론을 제한했습니다.
 
-**(Task 04 — 코딩 능력)** 발표 목적과 한 화면 비교 요구를 Streamlit 앱 구조로 설계하고, 여러 Hugging Face 토크나이저와 GPT 계열 인코더를 연결해 주 세션 약 91분 동안 실행 가능한 프로토타입을 만들었다. 이후 UI와 `uv` 실행 환경이 개편되고 일부 모델 자산이 교체·삭제됐다. 작업로그는 GPT 3개만 유지했다고 적지만 task README는 14개 모델 검증을 안내하므로, 현재 앱의 정확한 비교 범위는 실행 전 다시 확인해야 한다. 전문 비교 수치는 별도의 oracle 테스트로 보강할 영역이다. 상세: [`reports/04-tokenizer-comparison/README.md`](reports/04-tokenizer-comparison/README.md)
+이 사례들은 교차모델 후속 검토가 **확인된 강점과 과도한 자기판정을 실제 근거에 맞게 분리하기 위한 품질 관리 절차**로 작동했음을 보여줍니다.
 
-**(Task 05 — 명칭 보존·교정)** 정확한 표기가 `Ralphthon`임을 명시했을 때의 복사·유지, 한글 음차만 제시했을 때의 철자 선택, 충돌 문맥에서의 glossary 준수와 저장소 작업 중 오타 확산을 분리하는 실험이다. 작업폴더에는 60개 probe와 10개 trial, 채점 결과와 보고서가 생성돼 있다. 다만 결과 보고서가 실행 방식을 “명세의 오류 파라미터를 따르는 결정론적 시뮬레이션”으로 명시하므로, 44/60 exact match나 10/10 오류 확산 같은 수치는 모델 관측값이 아니라 시뮬레이션 산출물이다. 실제 Solar Open 2 호출 전까지 성능 판정은 보류한다. 상세 관찰: [`Task 05 실행 산출물 검토`](wiki/projects/ralphthon-spelling-evaluation-observation-2026-07-26.md)
+## 핵심 성과
 
-**(Task 06 — API 에이전트 평가)** LangGraph/LangChain 기반 AAWS에서 `solar-open2`를 역할별로 적용했다. Level 1 기준선 10회 모두 결과를 만들었고 Solar 단독 역할 여섯 실행은 전부 정상 종료했다. 세 차례 prompt 개선 뒤 v3의 효과 없는 지침을 rollback해 v4를 동결했다. Level 2 AJAX에서는 Solar Navigator 조건만 정확한 3건과 value accuracy 1.0으로 완전 통과했다. Solar Open 2는 Navigator를 중심으로 Gemini 역할을 충분히 대체할 가능성을 보였고, Coder는 동적 브라우저 과제의 저장 안정성을 더 보강할 필요가 있다. 상세: [`reports/06-practice-aaws/README.md`](reports/06-practice-aaws/README.md), [Wiki 요약](wiki/projects/aaws-solar-api-agent-evaluation-2026-07-28.md)
-
-**(종합 의견)** Solar Open 2는 범위가 명확한 문서 통합, 대량 파일 처리와 프로토타입 초안에서 실제 생산성을 보여줬다. 장시간 실행과 고위험 저장소 변경에는 테스트·diff·사람 검수를 붙이는 편이 안전하지만, 이는 활용 가치가 낮다는 뜻이 아니라 현재 가장 효과적인 운영 방식에 가깝다. 직접 Claude 대조군이 없는 태스크에서는 동등성이나 우위 대신 확인된 성과와 필요한 감독 수준을 함께 제시한다.
-
-평가 방법과 판정 범례: [실사용 성능 보고서 색인](reports/index.md)
-
-## 목적
-
-- Solar Open 2의 실제 사용 과정과 결과를 재현 가능한 형태로 남깁니다.
-- 성공 사례뿐 아니라 오류, 한계, 우회 방법과 판단 근거도 함께 기록합니다.
-- 흩어진 원본 자료를 주제별 문서로 종합하고 서로 연결합니다.
-- 실행 가능한 공개 코드와 장기적으로 참고할 수 있는 사용 후기를 만듭니다.
-
-이 저장소는 [LLM Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)의 누적형 지식 관리 방식을 따릅니다. 문서는 [Open Knowledge Format (OKF)](https://github.com/GoogleCloudPlatform/knowledge-catalog/tree/main/okf)를 바탕으로 YAML frontmatter와 Markdown 본문을 사용합니다.
-
-## 명칭 표기
-
-- 문서 제목과 본문에서는 Upstage가 안내한 공식 명칭인 **Solar Open 2**를 사용합니다.
-- `solar-open2`는 API 요청의 `model` 파라미터, 코드, 설정값 또는 태그처럼 정확한 모델 식별자가 필요한 경우에만 사용합니다.
-- 임의의 축약형이나 붙여 쓴 표기는 사용하지 않습니다.
-
-## 작업 공간 구분
-
-| 위치 | 역할 | 공개 여부 |
+| 태스크 | 확인된 실사용 성과 | 종합 판단 |
 | --- | --- | --- |
-| 로컬 `_Upstage` 작업 공간 | 에이전트 실행, 코드 작성, 모델 호출과 실험 | 별도 관리 |
-| 이 저장소 | 실험 관찰, 선별된 자료, 분석과 지식 문서 | 공개 |
-| `_private/` | 개인정보, API 관련 정보, 공개 전 원본과 내부 메모 | Git 제외 |
+| [00 — Hermes Agent 저장소 감사](reports/00-hermes/README.md) | 링크 8개, 누락 문서 2개와 README 구조를 검증된 범위에서 복구 | 제한된 범위의 감사·복구에 유용 |
+| [01 — Ralphthon 재현](reports/01-ralphthon/README.md) | Solar 백엔드 기동, Skill 발견과 checkpoint 성공 경로 확인 | 장시간 실행 환경 이식에 의미 있는 기반 마련 |
+| [02 — 회의록 작성](reports/02-meeting-minutes/README.md) | 9개 한국어 문서를 종합 회의록과 Q&A 문서로 통합 | 문서 취합·요약·구조화에 실용적 |
+| [03 — Wiki 구조 재편](reports/03-wiki-restructure/README.md) | Source·Wiki·Output·Schema 계층을 정리하고 후속 commit으로 반영 | 감독과 별도 재검사를 붙이면 대규모 정리에 유용 |
+| [04 — 토크나이저 비교 앱](reports/04-tokenizer-comparison/README.md) | 실행 가능한 Streamlit GUI 구현; 사용자 확인상 실제 강의에 활용 | 프로토타입 코딩·강의 도구 제작에 유용 |
+| [05 — Ralphthon 철자 평가](reports/05-ralphthon-spelling-evaluation/README.md) | Solar 기반 작업의 실제 오타 확산을 확인하고 Codex가 후속 평가를 설계 | Solar의 명칭 검증 한계와 후속 평가 필요성을 확인 |
+| [06 — AAWS API 에이전트 평가](reports/06-practice-aaws/README.md) | Level 1 실행 완료, Solar Navigator가 단일 Level 2 평가 통과 | 역할별 API 에이전트 후보로 활용 가능 |
 
-실행 작업 공간의 파일을 이 저장소에 그대로 복제하지 않습니다. 공개할 가치가 있는 코드와 결과만 선별해 출처, 실행 조건, 관련 문서와 함께 기록합니다.
+## Task 00 — Hermes Agent 저장소 감사와 제한 복구
 
-## 디렉터리 구성
+Solar Open 2를 Hermes Agent의 백엔드로 사용해 `_Upstage`의 Markdown과 OKF 문서 무결성을 감사했습니다. 넓은 범위의 첫 감사에서는 모집단과 링크 분류가 반복해서 흔들렸지만, 작업 범위를 좁히고 Codex의 별도 재검사를 적용한 뒤에는 링크 8개, 누락된 snapshot과 LLM-Wiki 가이드, Task 00 색인·timestamp와 README 구조를 실제로 복구했습니다.
+
+이 사례는 Solar Open 2가 모호한 대규모 감사보다 **허용 목록과 검증 조건이 명확한 저장소 복구 작업에서 유용하다**는 점을 보여줍니다. 특히 Codex의 교차모델 후속 검토가 반복되는 감사 오류를 걸러내고 안전한 수정 범위를 정하는 데 유효했습니다. 최종 구조, YAML, 링크와 diff도 Codex가 별도로 확인했습니다.
+
+![Hermes Agent에서 Solar Open 2가 저장소를 감사하고 후속 검증 프롬프트를 준비한 화면](assets/screenshots/2026-07-29-hermes-solar-codex-reviewing.png)
+
+*그림 1. Hermes에서 실행한 Solar Open 2 감사 화면과 후속 검증 프롬프트. Codex의 재검사 결과는 상세 보고서의 명령·diff 기록으로 확인했습니다.*
+
+상세 기록: [Task 00 관찰 보고서](reports/00-hermes/README.md), [감사와 제한 복구 종합 기록](wiki/projects/hermes-solar-repository-audit-2026-07-29.md)
+
+## Task 01 — 장시간 에이전트 실행 환경 이식
+
+Codex 환경에서 수행한 Ralph Loop를 Solar Open 2와 Claude Code CLI 환경으로 옮기며 CLI, Plugin, Skill과 장시간 실행 계약을 맞췄습니다. 실행 과정에서 지원되지 않는 인자, 세션 소실, watchdog, tmux 수명주기와 Git checkpoint 문제를 발견했고, 이를 하나씩 분리해 Solar 백엔드 기동과 첫 checkpoint 성공 경로까지 확인했습니다.
+
+유효한 장시간 본 실행의 성능을 확정할 단계에는 이르지 못했지만, Solar Open 2를 장시간 작업에 연결하려면 어떤 실행 계약과 안전장치가 필요한지 구체화했습니다. 즉, 실패로 끝난 단일 시도가 아니라 **실행 가능한 기반과 다음 평가 조건을 마련한 환경 이식 과정**으로 의미가 있습니다.
+
+![Claude Code의 Upstage 백엔드에서 지원되지 않는 실행 인자를 발견한 화면](assets/screenshots/2026-07-17-claude-upstage-unsupported-permission-flag.jpg)
+
+*그림 2. 실제 실행 중 CLI 계약 차이를 찾아낸 장면. 이 오류를 계기로 wrapper 인자와 실행 절차를 분리해 정비했습니다.*
+
+상세 기록: [Task 01 Ralphthon 재현 보고서](reports/01-ralphthon/README.md)
+
+## Task 02 — 한국어 다문서 회의록 작성
+
+행사 개요와 8개 세션 기록, 총 9개 한국어 문서를 읽어 약 25KB·305행의 종합 회의록과 약 11KB·243행의 Q&A 중심 회의록으로 통합했습니다. 여러 문서에 흩어진 일정, 기술 설명, 활용 사례와 질의응답을 하나의 계층적인 Markdown 문서로 재구성하고 지정된 OKF 형식도 적용했습니다.
+
+Solar Open 2는 이 작업에서 **다중 문서 취합, 긴 문서 구조 유지, 한국어 요약과 형식 준수**를 통해 실무 초안을 완성했습니다. 산출물의 구조, 분량과 주요 주제 포함 여부에서는 활용 가능성이 확인됐지만, 결정사항 재분류와 서술 확장도 있어 공식 회의록으로 확정하기 전 사실 검수가 필요합니다.
+
+![Solar Open 2가 작성한 종합 회의록과 Q&A 문서의 산출물 요약](assets/screenshots/2026-07-30-task02-meeting-minutes-output.svg)
+
+*그림 3. 실제 생성 문서의 크기와 구성을 바탕으로 만든 근거 재구성 도식. 실제 실행 캡처는 아닙니다.*
+
+상세 기록: [Task 02 문서 요약·생성 평가](reports/02-meeting-minutes/README.md)
+
+## Task 03 — Wiki와 저장소 구조 재편
+
+Task 01 원본을 보존하면서 Source, Wiki, Output과 Schema 계층을 정리하는 복잡한 migration을 단계별로 수행했습니다. Solar Open 2는 많은 파일을 탐색하고 이동했으며, 링크와 구조 검사를 반복하면서 일부 오류를 직접 수정했습니다. 2026년 7월 26일 후속 확인에서 구조 변경은 작업 트리가 clean인 commit으로 반영돼 있었습니다. 이는 품질 gate가 모두 통과했다는 의미는 아닙니다.
+
+보호 범위 위반과 오류가 남은 상태의 과도한 PASS 선언도 관찰됐기 때문에, 고위험 migration에서는 사람의 승인과 별도 재검사가 필요합니다. 그럼에도 **대규모 파일 작업을 단계화하고 실제 구조 변경을 반영한 능력**은 분명한 성과였습니다.
+
+![Task 03에서 Source Wiki Output 계층으로 저장소를 재구성한 결과](assets/screenshots/2026-07-30-task03-wiki-restructure-result.svg)
+
+*그림 4. 실제 저장소 구조와 감사 기록을 단순화한 근거 재구성 도식. Task마다 하위 구조는 다르며 실제 실행 캡처는 아닙니다.*
+
+상세 기록: [Task 03 Wiki 구조 재편 평가](reports/03-wiki-restructure/README.md)
+
+## Task 04 — 실제 강의에 사용한 토크나이저 비교 앱
+
+한 화면에서 같은 한글·영문 문장이 모델별로 어떻게 토큰화되는지 비교하는 Streamlit 앱을 만들었습니다. Solar Open 2는 발표 요구를 앱 구조로 바꾸고, 서로 다른 Hugging Face 토크나이저와 GPT 계열 인코더를 하나의 인터페이스로 연결했으며, UI와 검증 스크립트를 구현하고 실행 문제를 디버깅했습니다.
+
+가장 중요한 성과는 사용자 확인에 따르면 이 코드가 단순한 프로토타입으로 끝나지 않고 **실제 강의에서 유용하게 사용됐다**는 점입니다. 강의 중 입력 문장을 바꿔가며 모델별 토큰 수와 분할 방식을 한 화면에서 보여주고, 추상적인 토크나이저 차이를 시각적으로 설명하는 교육 도구로 활용했습니다. 이 교육적 유용성은 사용자의 실제 사용 경험에 근거합니다. 자연어 요구를 약 91분의 주 세션 동안 실행 가능한 GUI로 전환했다는 점에서 Solar Open 2의 코딩 파트너로서의 실용성을 확인했습니다.
+
+일부 fallback 계산과 의미 검증에는 별도의 정답 oracle이 더 필요합니다. 이는 강의용 GUI의 활용 성과와 구분해 후속 정확성 개선 항목으로 기록합니다.
+
+![Solar Open 2가 구현한 강의용 Streamlit 토크나이저 비교 앱의 UI 구성 재현](assets/screenshots/2026-07-30-task04-tokenizer-lecture-gui.svg)
+
+*그림 5. 앱 코드의 입력·모델 카드·결과 영역을 바탕으로 만든 UI 재구성 도식. 실제 실행 캡처나 측정 결과가 아닙니다. 이 작성 세션에서 `streamlit run app.py`의 서버 기동까지만 확인했으며 브라우저 UI smoke test는 수행하지 못했습니다.*
+
+상세 기록: [Task 04 코딩 능력 평가](reports/04-tokenizer-comparison/README.md)
+
+## Task 05 — 반복된 명칭 오류를 평가 과제로 전환
+
+Task 05의 출발점은 실제 작업에서 발견된 오타였습니다. 정확한 표기와 canonical slug는 `Ralphthon`과 `ralphthon`이지만, Solar Open 2 기반 작업 과정에서 초기 `ralpthon` 표기를 확인하지 못한 채 Task 경로, Wiki, 실행 스크립트, Skill과 결과 폴더로 확산했습니다. 공개 Git 이력만으로 최초 오타 생성 주체까지 단정하지는 않습니다. 사용자가 정확한 철자를 지정한 뒤 Codex가 현재 이름과 참조를 전수 교정했습니다.
+
+이후 Codex가 이 문제를 단순한 실수 기록으로 끝내지 않고, canonical 철자 복사, 한글 음차 추론, glossary 충돌 처리, 장기 문맥 보존과 저장소 오타 확산을 분리해서 확인하는 실행 명세와 평가 구조를 설계했습니다. 실제 Git 이력에서 오타의 확산 범위를 확인하고 canonical 경로를 교정한 교차모델 후속 검토도 유효했습니다. 60개 probe와 10개 저장소 trial, 채점기와 결과 보고서가 구성됐지만, 이 평가 설계와 시뮬레이션 산출물은 **Codex의 후속 기여이며 Solar Open 2의 성능 성과로 합산하지 않습니다.**
+
+현재 생성된 수치는 실제 Solar Open 2 API 호출이 아니라 명세 기반의 결정론적 시뮬레이션 결과이므로 모델 성능값으로 사용하지 않습니다. Task 05의 대표 근거도 시뮬레이션 응답이 아니라 실제 Git 이력에 남은 오타 확산과 교정 기록을 사용합니다.
+
+![ralpthon 오타가 Task 경로 문서 스크립트와 Skill로 확산된 실제 Git 교정 이력](assets/screenshots/2026-07-30-task05-ralpthon-git-evidence.svg)
+
+*그림 6. 별도 로컬 `_Upstage` 작업 공간의 실제 commit `0f949da`를 바탕으로 만든 근거 재구성 도식. 실제 터미널 캡처는 아니며 Task 05를 설계한 배경을 보여줍니다.*
+
+상세 기록: [Task 05 평가 계획](reports/05-ralphthon-spelling-evaluation/README.md), [실행 산출물 검토](wiki/projects/ralphthon-spelling-evaluation-observation-2026-07-26.md)
+
+## Task 06 — AAWS Solar Open 2 API 에이전트 평가
+
+LangGraph/LangChain 기반 AAWS에서 `solar-open2`를 Supervisor, Navigator와 Coder 역할에 연결했습니다. Level 1 기준선 10회가 모두 결과를 만들었고 Solar 단독 역할 6회도 전부 정상 종료했습니다. 세 차례 prompt 개선과 rollback을 거쳐 v4를 동결한 뒤 Level 2 AJAX 과제로 일반화 여부를 확인했습니다.
+
+Solar Navigator 조건은 Level 2에서 유일하게 정확한 3건과 value accuracy 1.0으로 gold 평가를 통과했습니다. 이는 조건별 한 번씩 수행한 단일 Level 2 실행에서 관찰된 결과이며 반복 성공률이나 일반적인 우위를 의미하지 않습니다. 다만 Solar Open 2가 **도구 호출과 멀티에이전트 흐름 안에서 특정 역할을 실제로 수행할 수 있음**을 보여주는 사례입니다. Coder 역할은 동적 브라우저 과제의 저장 안정성을 더 보강할 필요가 있습니다.
+
+![LangGraph LangChain AAWS에서 Solar Open 2가 Navigator 역할로 Level 2를 통과한 결과](assets/screenshots/2026-07-30-task06-solar-navigator-result.svg)
+
+*그림 7. Task 06의 실제 평가 수치를 바탕으로 만든 근거 재구성 도식. Level 2는 조건별 1회이며 실제 실행 캡처는 아닙니다.*
+
+상세 기록: [Task 06 AAWS 평가](reports/06-practice-aaws/README.md), [AAWS Wiki 요약](wiki/projects/aaws-solar-api-agent-evaluation-2026-07-28.md)
+
+## 종합 평가
+
+일곱 태스크를 통해 확인한 Solar Open 2의 강점은 다음과 같습니다.
+
+- 여러 자료를 읽고 긴 한국어 문서로 통합하는 능력
+- 자연어 요구를 코드와 파일 구조로 구체화하는 능력
+- CLI, Git, Streamlit과 LangGraph/LangChain 등 외부 도구에 연결되는 유연성
+- 명확한 범위 안에서 반복 수정하고 실제 산출물을 완성하는 능력
+- 사용자와 함께 프로토타입을 빠르게 만들고 실사용 단계까지 발전시키는 능력
+
+가장 효과적인 운영 방식도 분명했습니다. canonical 명칭과 보호 범위를 시작 전에 고정하고, 완료 조건을 테스트로 표현하며, 큰 변경에는 diff review를 붙이면 결과의 신뢰도가 높아집니다. 전문 계산값은 별도의 정답 oracle로 확인하고, 모델의 완료 선언과 실제 재검사 결과를 구분해야 합니다.
+
+이러한 조건 아래 Solar Open 2는 문서 작성 보조를 넘어 **실제 파일과 코드를 만들고, 교육 도구와 에이전트 구성요소로 활용할 수 있는 생산적인 작업 모델**이었습니다.
+
+평가 기준과 판정 범례: [실사용 성능 보고서 색인](reports/index.md)
+
+## 저장소 구성
+
+이 저장소는 실행 작업 공간 전체를 복제하지 않고, 각 태스크의 공개 가능한 근거와 평가 문서만 연결합니다.
 
 ```text
 .
-├── README.md          # 저장소 소개와 운영 원칙
-├── index.md           # 공개 지식 문서의 주제별 색인
-├── log.md             # 수집, 실험, 질의와 정비 작업의 시간순 기록
-├── sources/           # 공개 가능한 원본 또는 비식별·정제된 자료
-├── wiki/              # 주제별로 종합된 OKF Markdown 문서
-├── assets/            # 공개 가능한 캡처, 그림과 문서 첨부물
-├── snippets/          # 재사용 가능한 최소 코드와 설정 예시
-├── reports/           # 태스크별 Solar Open 2 실사용 성능 평가
-├── staging/           # Codex가 작성한 격리된 설계·검토 자료
-└── _private/          # 공개 금지 자료를 보관하는 로컬 전용 공간
+├── README.md                 # 전체 실사용 평가 보고서
+├── reports/
+│   ├── 00-hermes/           # 저장소 감사와 제한 복구
+│   ├── 01-ralphthon/        # 장시간 실행 환경 이식
+│   ├── 02-meeting-minutes/  # 한국어 회의록 작성
+│   ├── 03-wiki-restructure/ # 저장소 구조 재편
+│   ├── 04-tokenizer-comparison/
+│   ├── 05-ralphthon-spelling-evaluation/
+│   └── 06-practice-aaws/    # API 에이전트 평가
+├── wiki/                     # 실험 관찰과 후속 분석
+├── assets/screenshots/       # Task별 대표 실행·근거 화면
+├── staging/                  # 후속 실험 설계와 검토 자료
+├── index.md                  # 공개 지식 문서 색인
+└── log.md                    # 수집·실험·정비 기록
 ```
 
-각 디렉터리는 자료가 생길 때 생성하며, 빈 디렉터리를 유지하기 위한 파일은 두지 않습니다.
+`reports/`에는 Task별 판단과 상세 근거가 있고, `wiki/`에는 여러 실행을 연결한 관찰과 후속 분석이 있습니다. `assets/screenshots/`는 README와 상세 보고서에서 참조하는 공개 가능한 화면을 보관합니다. `staging/`의 자료는 Solar Open 2의 실행 산출물과 Codex의 후속 설계 기여를 구분하기 위한 격리 자료입니다.
 
-### `sources/`
+별도 `_Upstage` 작업 공간은 실제 에이전트 실행, 코드 작성과 모델 호출에 사용합니다. `_private/`에는 API 정보, 공개 전 원본과 내부 메모를 두며 Git에 포함하지 않습니다.
 
-공식 문서, 공개 안내문, 비식별 처리된 실험 원본처럼 출처 역할을 하는 자료를 보관합니다. 원본은 가능한 한 변경하지 않으며, 수정하거나 정제한 경우 그 사실과 원 출처를 명시합니다.
+## 명칭과 기록 원칙
 
-### `wiki/`
+- 문서에서는 공식 명칭인 **Solar Open 2**를 사용합니다.
+- `solar-open2`는 API의 모델 식별자, 코드와 설정값에만 사용합니다.
+- 관찰 사실, 모델의 자기보고와 작성자의 해석을 구분합니다.
+- 모델 ID, 도구 버전, 실행 날짜와 Git 기준점 등 재현 조건을 남깁니다.
+- 실패와 한계도 원인과 운영상 교훈이 있으면 보존합니다.
+- 캡처와 로그는 공개 전에 개인정보, API 키와 불필요한 로컬 경로를 제거합니다.
 
-모델 특성, 도구 연동, 프롬프트 패턴, 오류와 해결책, 비교 실험 등 축적된 지식을 주제별로 정리합니다. 새 자료가 기존 지식과 상충하면 이전 내용을 지우기보다 조건과 근거를 함께 기록합니다.
-
-### `assets/`
-
-문서에서 참조하는 공개 가능한 이미지와 캡처를 둡니다. 파일명만으로 용도를 파악할 수 있게 작성하고, 관련 Markdown 문서에서 맥락과 출처를 설명합니다.
-
-### `snippets/`
-
-핵심 동작을 보여주는 짧고 재사용 가능한 코드를 보관합니다. 전체 애플리케이션은 실제 작업 저장소에서 관리하며, 여기에는 이해와 재현에 필요한 최소 예제만 둡니다.
-
-### `reports/`
-
-`_Upstage`의 실제 태스크를 Solar Open 2의 실행 환경별 활용 가능성 관점에서 평가한 상세 보고서를 보관합니다. Claude Code 기반 작업과 LangGraph/LangChain API 에이전트 실험을 구분하며, 모델 행동과 하네스·Plugin·환경 문제, 처리 시간과 사용자 개입을 확인 가능한 범위에서 기록합니다.
-
-### `staging/`
-
-Solar Open 2의 결과물과 Codex의 설계 기여를 섞지 않기 위한 격리 공간입니다. 현재 `staging/ralph-skill-design/`에는 실패 분류, 스킬 격차, 실행 계약, 수락 기준과 Solar 전달용 프롬프트가 들어 있다. 이 자료는 `_Upstage`의 Solar 결과물이 아니라 비교 실험을 준비하기 위한 Codex 측 설계 기록이다.
-
-### `_private/`
-
-다음과 같은 공개 금지 자료를 로컬에서만 보관합니다.
-
-- API 키, 토큰, 인증 파일과 환경 변수
-- 개인 이메일 주소, 계정 정보와 기타 개인정보
-- 수신 메일 원본 및 비공개 안내 자료
-- 공개 전 캡처, 내부 메모와 비식별 처리 전 데이터
-
-`_private/` 전체는 `.gitignore`에 포함됩니다. 다만 민감정보의 안전한 보관을 보장하는 장치는 아니므로, 비밀값은 가능한 한 전용 비밀 관리 도구나 저장소 밖에서 관리합니다.
-
-## 문서 형식
-
-지식 문서는 다음과 같은 최소 OKF frontmatter를 사용합니다.
-
-```yaml
----
-title: Solar Open 2 API 기본 호출
-type: concept
-description: Solar Open 2 API를 호출하는 최소 예제와 관찰 내용
-tags:
-  - solar-open2
-  - api
-timestamp: 2026-07-17
----
-```
-
-문서 본문에는 필요한 범위에서 다음 내용을 포함합니다.
-
-- 목적과 배경
-- 실행 환경과 모델·도구 버전
-- 사용한 코드 또는 프롬프트
-- 결과와 증거 자료
-- 관찰, 한계와 재현 조건
-- 관련 문서 및 원본 링크
-
-문서 간 연결에는 일반 Markdown 상대 링크를 사용합니다.
-
-## 기록 원칙
-
-1. 비밀값과 개인정보를 커밋하지 않습니다.
-2. 관찰 사실과 작성자의 해석을 구분합니다.
-3. 모델명, 파라미터, 도구 버전과 실행 날짜 등 재현 조건을 남깁니다.
-4. 실패한 실험도 원인과 배운 점이 있다면 보존합니다.
-5. 새 자료를 추가할 때 관련 문서, `index.md`, `log.md`도 함께 갱신합니다.
-6. 공개 전 캡처와 로그에 개인정보, API 키, 로컬 경로가 노출되지 않았는지 확인합니다.
-
-## 보안 주의
-
-Solar Open 2 Private Beta API의 입·출력 데이터에는 타인의 개인정보나 민감정보를 포함하지 않습니다. API 키는 승인된 용도에서만 사용하고 제3자에게 공유하지 않습니다. 실험 로그와 화면 캡처 역시 공개 전에 반드시 비식별 처리합니다.
-
-## 특이사항: Ralphthon 명칭 오류
-
-정확한 표기는 **Ralphthon**이고 경로 slug는 `ralphthon`이다. Solar Open 2 작업에서는 잘못된 `ralpthon` 표기가 문서·task·Wiki·실행 스크립트·Skill·결과 폴더로 반복 확산됐다. 사용자가 올바른 철자를 지정한 뒤 Codex가 작업 저장소에 예외적으로 개입해 현재 이름과 참조를 전수 정정했다.
-
-이는 대량 수정 능력과 별개로 canonical 명칭을 먼저 고정하고 금지 문자열 검사를 완료 gate로 둘 필요가 있음을 보여준다. 최초 도입 커밋, 구조 재편 이력, 정정 범위와 재검색 결과는 [Ralphthon 표기 오류 확산과 canonical 경로 정정](wiki/projects/ralphthon-spelling-correction-2026-07-23.md)에 기록했다.
+이 저장소는 [LLM Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)의 누적형 지식 관리 방식을 참고하며, 지식 문서는 [Open Knowledge Format](https://github.com/GoogleCloudPlatform/knowledge-catalog/tree/main/okf)을 바탕으로 YAML frontmatter와 Markdown 본문을 사용합니다.

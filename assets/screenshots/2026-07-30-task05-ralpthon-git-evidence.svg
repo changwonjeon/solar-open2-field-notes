@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+  <rect width="1200" height="720" fill="#0d1117"/>
+  <rect x="45" y="35" width="1110" height="650" rx="16" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+  <text x="80" y="82" fill="#8b949e" font-size="21" font-family="monospace">$ git show --name-status 0f949da</text>
+  <text x="1100" y="82" text-anchor="end" fill="#d29922" font-size="16" font-family="sans-serif">로컬 Git 근거 재구성 · 캡처 아님</text>
+  <text x="80" y="125" fill="#f0f6fc" font-size="26" font-weight="700" font-family="sans-serif">실제 오타 확산과 교정 이력</text>
+  <text x="80" y="165" fill="#d29922" font-size="20" font-family="sans-serif">정확한 표기: Ralphthon · 반복된 잘못된 표기: ralpthon</text>
+  <rect x="80" y="205" width="1040" height="335" rx="10" fill="#0d1117"/>
+  <text x="105" y="248" fill="#8b949e" font-size="18" font-family="monospace">R075</text>
+  <text x="185" y="248" fill="#ff7b72" font-size="18" font-family="monospace">tasks/01-ralpthon/AGENTS.md</text>
+  <text x="600" y="248" fill="#7ee787" font-size="18" font-family="monospace">→ tasks/01-ralphthon/AGENTS.md</text>
+  <text x="105" y="295" fill="#8b949e" font-size="18" font-family="monospace">R100</text>
+  <text x="185" y="295" fill="#ff7b72" font-size="18" font-family="monospace">docs/ralpthon/index.md</text>
+  <text x="600" y="295" fill="#7ee787" font-size="18" font-family="monospace">→ docs/ralphthon/index.md</text>
+  <text x="105" y="342" fill="#8b949e" font-size="18" font-family="monospace">R100</text>
+  <text x="185" y="342" fill="#ff7b72" font-size="18" font-family="monospace">src/scripts/ralpthon/</text>
+  <text x="600" y="342" fill="#7ee787" font-size="18" font-family="monospace">→ src/scripts/ralphthon/</text>
+  <text x="105" y="389" fill="#8b949e" font-size="18" font-family="monospace">M</text>
+  <text x="185" y="389" fill="#ff7b72" font-size="18" font-family="monospace">.claude/skills/.../SKILL.md</text>
+  <text x="600" y="389" fill="#7ee787" font-size="18" font-family="monospace">canonical 표기 교정</text>
+  <text x="105" y="436" fill="#8b949e" font-size="18" font-family="monospace">M</text>
+  <text x="185" y="436" fill="#ff7b72" font-size="18" font-family="monospace">phase-specs/step-02-restore-ralpthon...</text>
+  <text x="600" y="436" fill="#7ee787" font-size="18" font-family="monospace">→ ...restore-ralphthon...</text>
+  <text x="105" y="485" fill="#c9d1d9" font-size="18" font-family="monospace">commit</text>
+  <text x="185" y="485" fill="#58a6ff" font-size="18" font-family="monospace">chore: ralpthon→ralphthon 표기 정정</text>
+  <rect x="80" y="575" width="1040" height="65" rx="10" fill="#2d1f1f" stroke="#6e3630"/>
+  <text x="600" y="615" text-anchor="middle" fill="#ffa198" font-size="21" font-weight="700" font-family="sans-serif">초기 오타가 Task 경로·문서·스크립트·Skill까지 확산된 실제 사례</text>
+  <text x="80" y="667" fill="#8b949e" font-size="16" font-family="sans-serif">출처: _Upstage Git commit 0f949dad7d2f547be183cabe7fd224fce1b32bf4</text>
+</svg>

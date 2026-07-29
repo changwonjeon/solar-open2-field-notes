@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <rect width="1200" height="675" fill="#0d1117"/>
+  <rect x="55" y="45" width="1090" height="585" rx="16" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+  <text x="90" y="95" fill="#8b949e" font-size="22" font-family="monospace">$ repository migration — Task 03</text>
+  <text x="1100" y="95" text-anchor="end" fill="#d29922" font-size="16" font-family="sans-serif">단순화한 근거 재구성 · 캡처 아님</text>
+  <text x="90" y="150" fill="#58a6ff" font-size="27" font-weight="700" font-family="sans-serif">Task 원본을 보존하면서 작업 공간을 역할별로 재구성</text>
+  <rect x="90" y="195" width="450" height="335" rx="12" fill="#0d1117" stroke="#30363d"/>
+  <text x="120" y="240" fill="#f0f6fc" font-size="23" font-family="monospace">tasks/</text>
+  <text x="145" y="282" fill="#7ee787" font-size="21" font-family="monospace">├── 01-ralphthon/</text>
+  <text x="175" y="322" fill="#c9d1d9" font-size="20" font-family="monospace">├── source/   # 원본 보존</text>
+  <text x="175" y="362" fill="#c9d1d9" font-size="20" font-family="monospace">├── docs/     # Wiki 문서</text>
+  <text x="175" y="402" fill="#c9d1d9" font-size="20" font-family="monospace">├── output/   # 실행 결과</text>
+  <text x="175" y="442" fill="#c9d1d9" font-size="20" font-family="monospace">└── data/     # 평가 자료</text>
+  <text x="145" y="492" fill="#7ee787" font-size="21" font-family="monospace">└── 02 … 06</text>
+  <rect x="590" y="195" width="510" height="335" rx="12" fill="#0d1117" stroke="#30363d"/>
+  <text x="625" y="245" fill="#f0f6fc" font-size="23" font-weight="700" font-family="sans-serif">관찰된 작업 과정</text>
+  <text x="625" y="300" fill="#7ee787" font-size="21" font-family="sans-serif">✓ 대량 파일 탐색과 이동</text>
+  <text x="625" y="345" fill="#7ee787" font-size="21" font-family="sans-serif">✓ Source · Wiki · Output 계층화</text>
+  <text x="625" y="390" fill="#7ee787" font-size="21" font-family="sans-serif">✓ 반복 검사와 링크 교정</text>
+  <text x="625" y="435" fill="#7ee787" font-size="21" font-family="sans-serif">✓ 후속 clean 작업 트리 확인</text>
+  <text x="625" y="488" fill="#d29922" font-size="18" font-family="sans-serif">clean은 품질 gate 통과를 의미하지 않음</text>
+  <text x="90" y="585" fill="#8b949e" font-size="20" font-family="sans-serif">실제 저장소 구조와 감사 기록을 바탕으로 단순화한 요약 도식</text>
+</svg>

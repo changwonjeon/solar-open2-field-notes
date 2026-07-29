@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760">
+  <rect width="1200" height="760" fill="#f5f7fb"/>
+  <rect x="35" y="25" width="1130" height="710" rx="16" fill="#ffffff" stroke="#d8dee8" stroke-width="2"/>
+  <rect x="35" y="25" width="1130" height="58" rx="16" fill="#ff4b4b"/>
+  <text x="75" y="63" fill="#ffffff" font-size="24" font-weight="700" font-family="sans-serif">LLM 토크나이저 비교 데모 · UI 구성 재현</text>
+  <text x="1125" y="63" text-anchor="end" fill="#ffffff" font-size="16" font-family="sans-serif">측정값·실행 캡처 아님</text>
+  <text x="75" y="135" fill="#172b4d" font-size="32" font-weight="700" font-family="sans-serif">같은 문장이 모델마다 어떻게 나뉘는지 비교</text>
+  <text x="75" y="180" fill="#5e6c84" font-size="20" font-family="sans-serif">한글 입력</text>
+  <rect x="75" y="195" width="1050" height="62" rx="9" fill="#ffffff" stroke="#aab4c3" stroke-width="2"/>
+  <text x="98" y="235" fill="#253858" font-size="22" font-family="sans-serif">Solar Open 2는 한국어 실무에 유용한 언어 모델입니다.</text>
+  <text x="75" y="303" fill="#172b4d" font-size="24" font-weight="700" font-family="sans-serif">모델별 토큰화 결과</text>
+  <rect x="75" y="330" width="325" height="300" rx="12" fill="#eef8f7" stroke="#4ecdc4" stroke-width="2"/>
+  <text x="100" y="373" fill="#167d78" font-size="22" font-weight="700" font-family="sans-serif">K-EXAONE 236B</text>
+  <text x="100" y="420" fill="#172b4d" font-size="27" font-weight="700" font-family="sans-serif">토큰 수 표시 영역</text>
+  <rect x="100" y="460" width="72" height="38" rx="7" fill="#c9efeb"/>
+  <rect x="180" y="460" width="78" height="38" rx="7" fill="#c9efeb"/>
+  <rect x="266" y="460" width="50" height="38" rx="7" fill="#c9efeb"/>
+  <text x="100" y="545" fill="#5e6c84" font-size="17" font-family="sans-serif">토큰 수와 분할 문자열을</text>
+  <text x="100" y="575" fill="#5e6c84" font-size="17" font-family="sans-serif">한 화면에서 확인</text>
+  <rect x="438" y="330" width="325" height="300" rx="12" fill="#f1efff" stroke="#7b68ee" stroke-width="2"/>
+  <text x="463" y="373" fill="#5b49c9" font-size="22" font-weight="700" font-family="sans-serif">Qwen 3.6</text>
+  <text x="463" y="420" fill="#172b4d" font-size="27" font-weight="700" font-family="sans-serif">토큰 수 표시 영역</text>
+  <rect x="463" y="460" width="68" height="38" rx="7" fill="#ddd8ff"/>
+  <rect x="539" y="460" width="68" height="38" rx="7" fill="#ddd8ff"/>
+  <rect x="615" y="460" width="88" height="38" rx="7" fill="#ddd8ff"/>
+  <text x="463" y="545" fill="#5e6c84" font-size="17" font-family="sans-serif">서로 다른 tokenizer를</text>
+  <text x="463" y="575" fill="#5e6c84" font-size="17" font-family="sans-serif">단일 UI로 통합</text>
+  <rect x="800" y="330" width="325" height="300" rx="12" fill="#eef6ff" stroke="#00a2ff" stroke-width="2"/>
+  <text x="825" y="373" fill="#0066cc" font-size="22" font-weight="700" font-family="sans-serif">GPT-4o</text>
+  <text x="825" y="420" fill="#172b4d" font-size="27" font-weight="700" font-family="sans-serif">토큰 수 표시 영역</text>
+  <rect x="825" y="460" width="64" height="38" rx="7" fill="#d6ecff"/>
+  <rect x="897" y="460" width="64" height="38" rx="7" fill="#d6ecff"/>
+  <rect x="969" y="460" width="80" height="38" rx="7" fill="#d6ecff"/>
+  <text x="825" y="545" fill="#5e6c84" font-size="17" font-family="sans-serif">강의 중 입력을 바꾸며</text>
+  <text x="825" y="575" fill="#5e6c84" font-size="17" font-family="sans-serif">차이를 즉시 설명</text>
+  <rect x="75" y="660" width="1050" height="44" rx="9" fill="#eaf5ee"/>
+  <text x="600" y="689" text-anchor="middle" fill="#116329" font-size="20" font-weight="700" font-family="sans-serif">사용자 확인: Solar Open 2가 구현한 앱을 실제 강의에서 활용</text>
+</svg>
