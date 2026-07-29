@@ -8,6 +8,60 @@ timestamp: 2026-07-17T11:50:35+09:00
 
 # Solar Open 2 Field Notes Log
 
+## 2026-07-29 23:51 KST — Task 00 Wiki 종합 및 공개 기록 최신화
+
+- Solar Open 2 + Hermes Agent의 네 차례 저장소 감사, 제한 링크 수정, 누락 산출물 사후 복원과 README 회귀 복구를 하나의 Wiki 프로젝트 문서로 종합했다.
+- 넓은 감사의 데이터 상태 `INCOMPLETE`와 절차 상태 `NON_COMPLIANT`, 이후 좁은 허용 목록에서 완료한 실제 수정 결과를 분리해 기록했다.
+- 최종 확인 범위는 상대링크 8개, 신규 문서 2개, Task 00 index·log·timestamp, README Task 00~02 구조와 `git diff --check`다.
+- 루트 README의 2026-07-29 현황과 Task 00 상세 링크, 공개 index와 보고서 색인을 최신 상태로 연결했다.
+- Wiki: [Hermes Agent + Solar Open 2 저장소 감사와 제한 복구](wiki/projects/hermes-solar-repository-audit-2026-07-29.md)
+
+## 2026-07-29 — Task 00 Hermes Agent 저장소 감사 시작
+
+- `_Upstage`의 `main` HEAD `5ed0ff7`에서 신규 미추적 `tasks/00-hermes/`와 `README.md`, `docs/index.md`, `docs/log.md`의 커밋되지 않은 변경을 확인했다.
+- 추적 파일 diff는 3개 파일 77줄 추가이며, Task 00 실제 Markdown 파일은 Schema `AGENTS.md`를 포함해 6개다.
+- Hermes 전용 세션·플레이북·참고 자료 구조는 생성됐지만 문서가 링크한 초기 context snapshot과 LLM-Wiki 가이드는 실제로 없고, README 트리에는 `sessions/`가 중복 기재돼 있다.
+- Solar Open 2 + Hermes Agent의 첫 읽기 전용 감사는 심각도와 수정 제안을 구조화했으나, 기존 `docs/index.md`의 Task 00을 누락으로 오판하고 링크·frontmatter 전수 집계를 제공하지 못했다.
+- 사용자가 규칙 적용 범위, H-02 철회, 링크와 frontmatter 전수 검사, 이전 발견의 정정 상태를 요구하는 후속 프롬프트를 전달했다.
+- 교정 응답은 H-02를 철회하고 `/docs/AGENTS.md`의 적용 범위와 하위 보호 규칙 해석을 개선해 명시적 피드백에 대한 자기교정 능력을 보여줬다.
+- 그러나 Task 05 상위 링크의 정답을 `../../01-ralphthon/`으로 제시했으며 실제 정답은 `../../../01-ralphthon/`이다. 세션 템플릿 안의 링크를 `AGENTS.md` 위치에서 계산한 오탐도 포함했다.
+- 실제 감사 범위는 `.git` 제외 Markdown 396개지만 보고서는 170개만 검사했다고 적어 전수검사 주장이 성립하지 않는다. 깨진 링크 32/34개 집계, 취소한 B-06의 High 우선순위 유지 등 내부 모순도 남았다.
+- 최종 평가는 구조화된 감사 초안과 자기교정에는 유용하지만 결정론적 검사기와 사람 검수 없이 수정 작업을 맡길 단계는 아니라는 것이다.
+- Hermes의 `/context` 화면과 Codex 교정 프롬프트를 함께 담은 실행 캡처를 보관했다. 화면 표시값은 `solar-open2`, 8분, context 97,071/262,144 tokens(37%)이며 사용량 추정치로만 기록한다.
+- 화면 캡처: [Hermes Solar 감사·Codex 검토](assets/screenshots/2026-07-29-hermes-solar-codex-reviewing.png)
+- 세 번째 응답은 요청된 제외 조건을 적용한 Markdown 149개와 manifest SHA-256을 정확히 확정했다. 앞선 Codex의 396개 언급은 `.venv`와 `node_modules` 미제외 집계였으므로 철회한다.
+- Task 05의 상위 링크를 `../../../01-ralphthon/`, output 링크를 `../../output/`으로 바로잡고 B-05·B-06 템플릿 오탐도 철회했다.
+- 그러나 실제 broken link 28건 표에 예정 산출물 8건을 포함한 뒤 합계에서 다시 더해 상호배타 분류를 위반했다. Task 00 log의 예정 링크 2건도 같은 문제가 있다.
+- Frontmatter 적용 대상 52개는 실제 `docs/` Schema 면제와 `tasks/**/docs/**/*.md` 10개 집계에 맞지 않으며, 재현 명령은 첫 줄 delimiter만 검사해 실제 YAML parsing 주장을 뒷받침하지 않는다.
+- 파일 무변경을 선언하면서 이전 `write_file` 동일 내용 덮어쓰기를 인정했으므로 읽기 전용 제약도 엄밀히 충족하지 않았다.
+- 자체 계약상 최종 상태는 `VERIFIED`가 아니라 `INCOMPLETE`로 평가한다.
+- 네 번째 응답은 이전 쓰기 동작을 인정하고 `PROCEDURE_STATUS: NON_COMPLIANT`로 정정했다.
+- 149개 모집단 안의 Schema는 16개인데 루트 Schema까지 더해 17개로 계산했으며, 그 결과 면제·적용 대상 등식이 잘못됐다.
+- 제공한 manifest 명령을 실행하면 절대경로와 시작 정규식이 맞지 않아 0개 파일과 빈 hash를 출력한다.
+- 제공한 YAML 명령은 `.git`·`.venv`·`node_modules` 제외가 없고 `source/` 등의 component 검사도 작동하지 않아 `Targets: 380, Success: 53, Fail: 327`을 출력했다. 주장한 52/0을 재현하지 못한다.
+- 링크 총수 286은 새 occurrence 추출값이 아니라 이전 294에서 중복 분류 8을 산술적으로 뺀 값이라 근거가 부족하다.
+- 네 번째 응답의 최종 판정은 `DATA_STATUS: INCOMPLETE`, `PROCEDURE_STATUS: NON_COMPLIANT`로 기록한다.
+- 감사 반복 뒤 독립 검증된 상대링크 8개만 네 파일에서 수정하도록 허용했다. Hermes는 Task 00 공통 docs 링크 4개와 Task 05의 Task 01·output 링크 4개를 정확히 교체했다.
+- Codex 재검증에서 8개 대상이 모두 존재하고 `git diff --check`가 통과했으며 staging·commit은 없음을 확인했다.
+- Task 00은 여전히 전체 미추적 디렉터리이므로 실제 Git 상태에는 `?? tasks/00-hermes/`만 나타난다. Hermes가 Task 00의 두 파일을 별도 `M`으로 보고한 내용은 부정확하다.
+- Hermes의 수정 후 SHA-256 표는 placeholder로 남았으며, Codex가 실제 네 hash를 상세 보고서에 보완했다.
+- 제한 링크 수정 결과는 `COMPLETED`로 수용하되 완료 보고는 독립 검수가 필요한 수준으로 평가한다.
+- 후속 제한 작업에서 누락된 초기 context snapshot과 LLM-Wiki 가이드를 생성하고 Task 00 index 및 공통 log를 갱신했다. 두 신규 문서는 YAML parser와 링크 존재 검사를 통과했다.
+- Task 00 `log.md`는 실제로 변경되지 않아 복원 변경 이력과 사후 복원 상태가 누락됐다.
+- 루트 README의 중복 행 제거 과정에서 `01-ralphthon/` 루트 행까지 사라져 Task 01 구조가 Task 00 아래로 잘못 보이는 회귀가 발생했다.
+- 신규 파일은 21:46 KST경 생성됐지만 frontmatter timestamp는 `17:30Z`로 KST 다음 날 02:30을 가리켜 실제 생성 시각 요구를 충족하지 않는다.
+- Task 00 index의 설명용 `../../../docs/log.md`도 아직 두 단계 경로로 정정되지 않았다.
+- 산출물 복원 작업은 신규 파일 2개 생성에는 성공했지만 전체 상태는 부분 완료로 기록한다.
+- 후속 수정에서 Task 00 log의 사후 복원 이력·색인 상태, index의 `../../docs/log.md`, 신규 문서 timestamp를 정상화했다.
+- README는 완료 보고와 달리 Task 01 루트 행이 Ralphthon 자식 뒤에 삽입됐고, 원래 Task 02 루트 행이 Task 01로 바뀌어 `02-meeting-minutes/`가 사라졌다.
+- Task 00의 `AGENTS.md` 행도 README 트리에서 누락된 상태다.
+- Task 02 부재는 기존 별도 관리 상태가 아니라 Git 기준 원래 존재하던 행을 수정 과정에서 잃은 회귀다.
+- README 구조 복구 전까지 산출물 정합화 작업은 `BLOCKED`로 기록한다.
+- 마지막 README 한정 작업에서 Task 00~02 블록을 정답 구조로 교체했다. Task 00~03 루트 행은 각각 한 번 존재하고 Task 01·02 자식 구조의 교차 오염이 해소됐다.
+- README SHA-256 `7cf0c28476be9ee9db5a1b5b1a9a1dd7d8b3dfe68b6fbcf34034d7715ac8e2c4`, `git diff --check` 통과와 무 staging 상태를 독립 확인했다.
+- 제한 링크 수정, 누락 산출물 복원, Task 00 색인·timestamp와 README 구조 복구를 최종 `COMPLETED`로 전환한다.
+- 상세 보고서: [Task 00 — Hermes Agent + Solar Open 2 저장소 감사](reports/00-hermes/README.md)
+
 ## 2026-07-28 — Task 06 Mission 1 마감
 
 - 실행 중인 Mission 프로세스가 없는 상태에서 이번 실험을 마감했다.

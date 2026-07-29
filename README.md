@@ -12,18 +12,23 @@ Upstage **Solar Open 2**를 실제 에이전트 환경에서 사용하며 얻은
 
 ## 현재 진행 상황
 
-Solar Open 2를 실제 에이전트 환경에서 사용한 여섯 가지 태스크를 관찰하고 있다. Task 01~05는 주로 Claude Code CLI 모델 백엔드 작업이며, Task 06은 LangGraph/LangChain 에이전트에서 Upstage API로 Solar Open 2를 호출하는 별도 실험이다. 일반 벤치마크 점수가 아니라 요구사항 이해, 도구 사용, 환경 적응, 오류 복구, 자기검증, 처리 시간과 사용자 개입 비용을 기준으로 삼는다. Task 05는 실행 산출물까지 만들어졌지만 실제 모델 호출이 아닌 결정론적 시뮬레이션이므로 Solar Open 2의 철자 성능 결과로 확정하지 않는다.
+Solar Open 2를 실제 에이전트 환경에서 사용한 일곱 가지 태스크를 관찰하고 있다. Task 00은 Hermes Agent, Task 01~05는 주로 Claude Code CLI 모델 백엔드 작업이며, Task 06은 LangGraph/LangChain 에이전트에서 Upstage API로 Solar Open 2를 호출하는 별도 실험이다. 일반 벤치마크 점수가 아니라 요구사항 이해, 도구 사용, 환경 적응, 오류 복구, 자기검증, 처리 시간과 사용자 개입 비용을 기준으로 삼는다. Task 00은 감사 보고의 반복 오류 뒤 독립 검증된 상대링크 8개를 제한적으로 수정하는 데 성공했고, Task 05는 실행 산출물까지 만들어졌지만 실제 모델 호출이 아닌 결정론적 시뮬레이션이므로 성능 결과를 확정하지 않는다.
 
 > **2026-07-26 관찰 업데이트:** `_Upstage`는 `main`의 `c488bd0`에서 clean 상태이며 Task 01~05 디렉터리가 모두 추적돼 있다. 이는 작업 반영 상태에 대한 확인이지, 각 태스크의 자체 완료 선언이나 성능 수치를 독립 검증했다는 뜻은 아니다. 최신 태스크별 근거와 미해결 사항은 [`_Upstage` Task 01~05 관찰 현황](wiki/projects/upstage-task-status-2026-07-26.md)에 정리했다.
 
+> **2026-07-29 23:51 KST 업데이트:** Task 00에서 Solar Open 2 + Hermes Agent의 저장소 감사와 제한 복구를 완료했다. 넓은 감사 보고는 반복 검증 오류로 `INCOMPLETE/NON_COMPLIANT`였지만, 독립 검증된 링크 8개와 누락 문서 2개, Task 00 색인·timestamp 및 README 구조는 좁은 허용 목록 아래 복구했다. 전체 과정과 운영 교훈은 [Hermes Agent + Solar Open 2 저장소 감사와 제한 복구](wiki/projects/hermes-solar-repository-audit-2026-07-29.md)에 정리했다.
+
 | 태스크 | 현재 판단 | 관측 시간 | 평가 관점의 요약 |
 | --- | --- | --- | --- |
+| [00 — Hermes Agent 저장소 감사](reports/00-hermes/README.md) | 제한 복구 완료 | 미측정 | 링크 8개, 누락 문서 2개, Task 00 log·index·timestamp와 README Task 00~02 구조를 독립 검증과 함께 복구했다. |
 | [01 — Ralphthon 재현 (장시간 에이전트 실행·환경 이식)](reports/01-ralphthon/README.md) | 본 과제 성능 판정 불가 | Solar 본 실행 없음 | Codex용 장시간 자율 작업을 Claude Code 환경으로 이식하는 난도와 실행 준비도를 시험한다. Solar 백엔드 기동과 일부 안전 게이트는 확인했지만 유효한 본 실행은 없다. |
 | [02 — 회의록 작성 (문서 요약·생성)](reports/02-meeting-minutes/README.md) | 해당 범위에서 대체 가능 | 미측정 | 범용 LLM의 기본 업무인 한국어 다문서 취합·요약·구조화를 시험했으며, 문제없이 실용적인 결과를 완성했다. |
 | [03 — Wiki 구조 재편 (에이전트 도구 사용·저장소 정리)](reports/03-wiki-restructure/README.md) | 감독하에 조건부 대체 가능 | 미측정 | migration 결과는 clean commit으로 반영됐다. 대규모 정리 능력은 확인됐지만 보호 범위 위반과 과도한 PASS 선언이 관찰돼 독립 검증이 필요하다. |
 | [04 — 토크나이저 비교 (코딩 능력)](reports/04-tokenizer-comparison/README.md) | 프로토타입 코딩·디버깅에 대체 가능 | 주 세션 약 91분, 겹치는 후속 약 26분 | 실행 가능한 Streamlit 앱을 만들고 후속 UI·환경 개편도 반영했다. 현재 문서의 모델 범위가 서로 달라 수치와 실행 범위는 다시 고정해야 한다. |
 | [05 — Ralphthon 철자 오류 재현 (명칭 보존·교정)](reports/05-ralphthon-spelling-evaluation/README.md) | 시뮬레이션 산출물 생성·실모델 미검증 | 실제 모델 관측 시간 없음 | 60개 probe와 10개 저장소 trial 결과가 생성됐으나 명세 기반 결정론적 시뮬레이션이다. 실제 Solar Open 2 성능 판정에는 사용할 수 없다. |
 | [06 — AAWS Solar Open 2 API 에이전트 평가](reports/06-practice-aaws/README.md) | Mission 1 마감·역할별 대체 가능 | Level 1 평균 85.262~228.553초 | Level 1 기준선과 prompt tuning, Level 2까지 완료했다. Solar Navigator는 Level 2에서 유일하게 gold 평가를 통과했다. |
+
+**(Task 00 — Hermes Agent 저장소 감사)** Solar Open 2를 Hermes Agent 백엔드로 사용해 `_Upstage`의 Markdown/OKF 무결성을 감사하고 수정하는 실험이다. 초기 감사에서는 모집단·링크 분류·재현 코드와 절차 준수 문제가 반복됐지만, 좁은 허용 목록과 독립 검증을 적용한 후 링크 8개, 누락 snapshot과 LLM-Wiki 가이드, Task 00 log·index·timestamp 및 README Task 00~02 구조를 복구했다. 최종 README hash와 구조, YAML, 링크, diff check를 Codex가 확인했으며 staging·commit·push는 없다. 상세: [Wiki 종합](wiki/projects/hermes-solar-repository-audit-2026-07-29.md), [관찰 보고서](reports/00-hermes/README.md)
 
 **(Task 01 — 장시간 에이전트 실행·환경 이식)** Codex가 랄프톤에서 수행한 Ralph Loop를 Solar Open 2 + Claude Code로 재현하려는 실험이다. 서로 다른 CLI·Plugin·Skill 계약을 변환하고 장시간 자율 실행이 가능한지 확인한다는 데 의미가 있다. Solar 백엔드 기동, 프로젝트 Skill 발견과 첫 checkpoint 성공 경로까지 확인했지만 유효한 본 실행은 아직 없다. 상세: [`reports/01-ralphthon/README.md`](reports/01-ralphthon/README.md)
 

@@ -11,6 +11,7 @@ timestamp: 2026-07-17T11:50:35+09:00
 ## 실사용 성능 보고서
 
 - [Solar Open 2 실사용 성능 보고서](reports/index.md) — Claude Code 및 LangGraph/LangChain API 환경의 활용 범위, 오류 해결 능력, 처리 시간과 사용자 개입 비용
+- [Task 00 — Hermes Agent 저장소 감사](reports/00-hermes/README.md) — 감사 오류의 반복 교정과 링크·누락 문서·Task 00 색인·README 구조 제한 복구 완료
 - [Task 01 — Ralphthon 재현](reports/01-ralphthon/README.md) — Codex 기준선의 Solar Open 2 + Claude Code 이식 과정과 실행 준비도
 - [Task 02 — 회의록 작성](reports/02-meeting-minutes/README.md) — 한국어 다문서 취합·구조화 품질과 사실 검수 필요성
 - [Task 03 — Wiki 구조 재편](reports/03-wiki-restructure/README.md) — Task 01 자산 migration의 정확성, 지시 준수와 자기검증
@@ -20,6 +21,7 @@ timestamp: 2026-07-17T11:50:35+09:00
 
 ## 프로젝트
 
+- [Hermes Agent + Solar Open 2 저장소 감사와 제한 복구](wiki/projects/hermes-solar-repository-audit-2026-07-29.md) — 네 차례 감사 교정, 링크 8개 수정, 누락 산출물과 README 구조 복구 및 운영 교훈
 - [AAWS에서 Solar Open 2 API 에이전트 역할 평가](wiki/projects/aaws-solar-api-agent-evaluation-2026-07-28.md) — Level 1 기준선, prompt tuning과 Level 2에서 확인한 역할별 Gemini 대체 가능성
 - [Ralphthon 표기 오류 확산과 canonical 경로 정정](wiki/projects/ralphthon-spelling-correction-2026-07-23.md) — Solar Open 2 작업에서 고유명사 오타가 저장소 경로 전반으로 확산된 Git 근거와 Codex 정정 기록
 - [`_Upstage` 구조 복구 실행 계획](wiki/projects/upstage-structure-recovery-plan-2026-07-23.md) — 누락 원본 복구, task 구조 정규화, 문서·OKF·링크 정합화와 최종 gate를 다섯 단계로 나눈 진행 중 계획

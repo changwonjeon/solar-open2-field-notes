@@ -8,12 +8,13 @@ timestamp: 2026-07-23T00:00:00+09:00
 
 # Solar Open 2 실사용 성능 보고서
 
-이 보고서 묶음은 Solar Open 2의 실제 작업 성능을 실행 환경별로 평가한다. Task 01~05는 주로 Claude Code CLI의 모델 백엔드로 사용한 기록이며, Task 06은 별도로 LangGraph/LangChain에서 Upstage API를 통해 Solar Open 2를 호출하는 AAWS 실습이다. 일반 벤치마크 점수 대신 요구사항 이해, 도구 사용, 환경 적응, 오류 복구, 자기검증, 처리 시간과 사용자 개입 비용을 살핀다.
+이 보고서 묶음은 Solar Open 2의 실제 작업 성능을 실행 환경별로 평가한다. Task 00은 Hermes Agent, Task 01~05는 주로 Claude Code CLI의 모델 백엔드로 사용한 기록이며, Task 06은 별도로 LangGraph/LangChain에서 Upstage API를 통해 Solar Open 2를 호출하는 AAWS 실습이다. 일반 벤치마크 점수 대신 요구사항 이해, 도구 사용, 환경 적응, 오류 복구, 자기검증, 처리 시간과 사용자 개입 비용을 살핀다.
 
 태스크마다 목적과 성공 기준이 다르므로 하나의 종합 점수로 서열화하지 않는다. 측정되지 않은 항목은 0점이 아니라 `N/A`로 표시하며, Solar Open 2의 모델 행동과 CLI·Plugin·운영 환경 문제를 구분한다. 다만 사용자가 실제로 부담한 변환과 감독은 대체 비용에 포함한다.
 
 ## 보고서
 
+- [Task 00 — Hermes Agent 저장소 감사](00-hermes/README.md): 감사 반복 오류와 독립 검증을 거친 링크·누락 산출물·색인·README 구조 복구 완료 ([Wiki 종합](../wiki/projects/hermes-solar-repository-audit-2026-07-29.md))
 - [Task 01 — Ralphthon 재현 (장시간 에이전트 실행·환경 이식)](01-ralphthon/README.md): Codex용 Ralph Loop를 Solar Open 2 + Claude Code로 이식하는 난도, 장애 해결과 장시간 실행 준비도
 - [Task 02 — 회의록 작성 (문서 요약·생성)](02-meeting-minutes/README.md): 한국어 다문서 취합·구조화·요약·생성이라는 범용 LLM 기본 능력
 - [Task 03 — Wiki 구조 재편 (에이전트 도구 사용·저장소 정리)](03-wiki-restructure/README.md): 대규모 파일·Git 작업에서의 도구 사용, 지시 준수와 자기검증
